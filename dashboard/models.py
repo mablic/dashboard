@@ -1,18 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
-from .mongoDB import mongoDB
 from django.urls import reverse
-import django_filters
-# from django.contrib.postgres.fields import ArrayField
-
-# class Model():
-
-#     def __init__(self):
-#         self.DB = mongoDB.MongoDB()
-    
-#     def get_leetCode_data(self):
-#         self.DB.connect_to_db(clusterName='studyDB', table='leetCodeDB')
-#         return self.DB.find_all_data()
 
 class LeetCode(models.Model):
 

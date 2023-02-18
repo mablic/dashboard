@@ -3,7 +3,7 @@ from django.views.generic import ListView
 from .models import LeetCode, UserAnswer
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
-from django.db.models import IntegerField, F
+from django.db.models import IntegerField
 from django.db.models.functions import Cast
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
