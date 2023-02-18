@@ -13,15 +13,15 @@ class UserRegisterForm(UserCreationForm):
 
 
 class UserUpdateForm(forms.ModelForm):
-    # email = forms.EmailField()
+    email = forms.EmailField()
 
     class Meta:
         model = User
-        fields = []
+        fields = ['email']
 
 
 class ProfileUpdateForm(forms.ModelForm):
-    
+
     class Meta:
         model = Profile
         fields = []
