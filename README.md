@@ -58,7 +58,7 @@ We welcome contributions from the community to help improve and grow the LeetCod
     
 **Contact Us**
 
-If you have any questions or feedback about the LeetCode Learning Hub, please don't hesitate to contact us at support@leetcodelearninghub.com. We're here to help and look forward to hearing from you!
+If you have any questions or feedback about the LeetCode Learning Hub, please don't hesitate to contact us at Github. We're here to help and look forward to hearing from you!
 
 
 ## Authors
