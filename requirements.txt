@@ -4,6 +4,7 @@ crispy-bootstrap5==0.7
 discord==2.1.0
 discord.py==2.1.0
 dj-database-url==0.5.0
+dnspython==2.2.0
 Django==4.0.2
 django-crispy-forms==1.14.0
 django-filter==22.1
