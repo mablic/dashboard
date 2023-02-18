@@ -10,13 +10,12 @@ mimetypes.add_type("text/javascript", ".js", True)
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!c2+353c3z+!h6@72ae+@k5s2q7f)d48=cg0wt-ur^jltbbfy6'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['https://sdashboard.herokuapp.com/']
 
 # Application definition
 
