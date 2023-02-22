@@ -24,6 +24,9 @@ class LeetCode(models.Model):
     def get_answer_by_num(self):
         return UserAnswer.objects.filter(leetCodeNo=self.questionNo)
 
+    def get_answer_count_by_num(self):
+        return str(UserAnswer.objects.filter(leetCodeNo=self.questionNo).count())
+
     def get_types(self):
         allObj = LeetCode.objects.values_list("questionType").distinct()
         outList = set()

@@ -100,6 +100,7 @@ function viewLeetCode(ret) {
         var toastCard = $('#toastBody');
         toastCard.text("Please login");
         $('.toast').toast('show');
+        $('#offcanvasRight').offcanvas('hide');
     }else{
         // console.log("IN ELSE");
         dashboardHeader.html('#' + String(questionNo) + ' - ' + 'Problem Dashboard <br /><br /><small>' + questionName + '</small>')

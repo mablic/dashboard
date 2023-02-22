@@ -51,6 +51,9 @@ class homeView(ListView):
             context['filters'] = self.request.GET.copy()
         if 'typeList' not in context.keys():
             context['typeList'] = LeetCode().get_types()
+        # if 'getQuestionCount' not in context.keys():
+        #     print(f"Question Answer: {LeetCode.objects.first().get_answer_count_by_num()}")
+        #     context['getQuestionCount'] = LeetCode.objects.first().get_answer_count_by_num()        
         context['filters'].pop('page', None)
         paginator = context['paginator']
         paginator.filters = self.request.GET.copy()

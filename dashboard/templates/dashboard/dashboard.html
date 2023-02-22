@@ -77,7 +77,7 @@
 <body onload="formatTable()"></body>
   <!-- This is the main table -->
   <table class="table table-bordered table-condensed" id="leetCodeTable">
-    <thead>
+    <thead class="font-monospace">
       <tr>
         <th style="width: 2%">
           <div class="col-sm-1">
@@ -102,6 +102,11 @@
         <th style="width: 27%">
           <div class="col-sm-3">
             Type
+          </div>
+        </th>
+        <th style="width: 5%">
+          <div class="col-sm-3">
+            Users
           </div>
         </th>
         <th style="width: 10%">
@@ -131,6 +136,9 @@
             <span class="badge rounded-pill text-bg-primary" id="type_span_{{ t }}" >{{ t }}</span>
           {% endfor %}
         </td>
+        <td>
+          <span class="badge bg-info rounded-pill">{{ row.get_answer_count_by_num }} </span>
+        </td>
         <td> 
           <div class="d-grid gap-2 d-md-block">
             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
@@ -139,10 +147,28 @@
                 Action
               </button>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" onclick="addUser(this)" questionNo="{{ row.questionNo }}" ansType="1" userId="{{ user.id }}" userName="{{ user.username }}">I know, DM Me!</a></li>
-                <li><a class="dropdown-item" onclick="addUser(this)" questionNo="{{ row.questionNo }}" ansType="2" userId="{{ user.id }}" userName="{{ user.username }}">I know...</a></li>
-                <li><a class="dropdown-item" onclick="addUser(this)" questionNo="{{ row.questionNo }}" ansType="3" userId="{{ user.id }}" userName="{{ user.username }}">In my plan!</a></li>
-                <li><a class="dropdown-item" onclick="addUser(this)" questionNo="{{ row.questionNo }}" ansType="4" userId="{{ user.id }}" userName="{{ user.username }}">Help please!</a></li>
+                <li>
+                  <a class="dropdown-item" onclick="addUser(this)" questionNo="{{ row.questionNo }}" ansType="1" userId="{{ user.id }}" userName="{{ user.username }}">
+                    <span class="badge rounded-pill text-bg-primary">I know, DM Me!</span>
+                  </a></li>
+                <li>
+                  <a class="dropdown-item" onclick="addUser(this)" questionNo="{{ row.questionNo }}" ansType="2" userId="{{ user.id }}" userName="{{ user.username }}">
+                    <span class="badge rounded-pill text-bg-secondary">
+                      I know...
+                    </span>
+                  </a></li>
+                <li>
+                  <a class="dropdown-item" onclick="addUser(this)" questionNo="{{ row.questionNo }}" ansType="3" userId="{{ user.id }}" userName="{{ user.username }}">
+                    <span class="badge rounded-pill text-bg-success">
+                      In my plan!
+                    </span>
+                  </a></li>
+                <li>
+                  <a class="dropdown-item" onclick="addUser(this)" questionNo="{{ row.questionNo }}" ansType="4" userId="{{ user.id }}" userName="{{ user.username }}">
+                    <span class="badge rounded-pill text-bg-danger">
+                      Help please!
+                    </span>
+                  </a></li>
               </ul>
               <!-- <button class="btn btn-info" type="button">View All</button> -->
               <button id="viewButton" class="btn btn-outline-info btn-sm" type="button" 
