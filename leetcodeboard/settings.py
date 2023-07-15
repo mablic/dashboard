@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 import mimetypes
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -13,7 +14,6 @@ mimetypes.add_type("text/javascript", ".js", True)
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
 # DEBUG = True
 ALLOWED_HOSTS = ['sdashboard.herokuapp.com']
 # ALLOWED_HOSTS = ['127.0.0.1']
@@ -143,3 +143,5 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('EMAIL_ACCOUNT')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
+
+django_heroku.settings(locals())
