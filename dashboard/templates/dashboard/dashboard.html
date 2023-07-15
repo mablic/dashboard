@@ -1,343 +1,42 @@
 {% extends "dashboard/base.html" %}
 {% block content %}
 
-<div class="container fixed-body">
-  <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-    {% if user.is_authenticated %}
-      <button type="button" onclick="filterByUser(this)" value="all_user_filter" 
-        urlValue="{% url 'dashboard' %}" class="btn btn-secondary">ALL</button>
-      <button type="button" onclick="filterByUser(this)" value="{{ user.username }}" 
-        urlValue="{% url 'dashboard' %}" class="btn btn-secondary">Me</button>
-    {% else %}
-      <button type="button" onclick="filterByUser(this)" value="all_user_filter" 
-      urlValue="{% url 'dashboard' %}" class="btn btn-secondary">ALL</button>
-    {% endif %}
-  </div>
-  <div class="btn-group">
-    <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Difficult
-    </button>
-    <div id="difficult-list-group" class="dropdown-menu">
-      <ul class="list-group">
-        <li class="list-group-item">
-          <input id="checkerBox" onclick="addTypeFilter(this)" class="form-check-input me-1" 
-          type="checkbox" value="All">
-          <button type="button" class="badge text-bg-info" disabled>All</button>
-        </li>
-        <li class="list-group-item">
-          <input id="checkerBox" onclick="addTypeFilter(this)" class="form-check-input me-1" 
-          type="checkbox" value="Easy">
-          <button type="button" id="type_span_Easy" disabled>Easy</button>
-        </li>
-        <li class="list-group-item">
-          <input id="checkerBox" onclick="addTypeFilter(this)" class="form-check-input me-1" 
-          type="checkbox" value="Medium">
-          <button type="button" id="type_span_Medium" disabled>Medium</button>
-        </li>
-        <!-- templateURL="{{ request.build_absolute_uri }}" -->
-        <li class="list-group-item">
-          <input id="checkerBox" onclick="addTypeFilter(this)" class="form-check-input me-1" 
-          type="checkbox" value="Hard">
-          <button type="button" id="type_span_Hard" disabled>Hard</button>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <div class="btn-group">
-    <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Question Type
-    </button>
-    <div id="type-list-group" class="dropdown-menu">
-      <ul class="list-group" id="difficultListGroup">
-        <li class="list-group-item">
-          <div class="form-check">
-            <input class="form-check-input" onclick="addQuestionFilter(this)" type="radio" 
-              name="flexRadioDefault" value="All">
-            <button class="badge text-bg-info" for="flexRadioDefault1" disabled>
-              All
-            </button>
-          </div>
-        </li>
-        {% for type in typeList %}
-          <li class="list-group-item">
-            <div class="form-check">
-              <input class="form-check-input" onclick="addQuestionFilter(this)" type="radio" 
-                name="flexRadioDefault" value="{{ type }}">
-              <button class="badge text-bg-secondary" for="flexRadioDefault1" disabled>
-                {{ type }}
-              </button>
-            </div>
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
-  </div>
-</div>
-
+{% include "dashboard/filterboard.html" %}
 <body onload="formatTable()"></body>
-  <!-- This is the main table -->
-  <table class="table table-bordered table-condensed" id="leetCodeTable">
-    <thead class="font-monospace">
-      <tr>
-        <th style="width: 2%">
-          <div class="col-sm-1">
-            #
-          </div>
-        </th>
-        <th style="width: 27%">
-          <div class="col-sm-3">
-            Subject
-          </div>
-        </th>
-        <th style="width: 2%">
-          <div class="col-sm-3">
-            Rate
-          </div>
-        </th>
-        <th style="width: 2%">
-          <div class="col-sm-3">
-            Difficult
-          </div>
-        </th>
-        <th style="width: 27%">
-          <div class="col-sm-3">
-            Type
-          </div>
-        </th>
-        <th style="width: 5%">
-          <div class="col-sm-3">
-            Users
-          </div>
-        </th>
-        <th style="width: 10%">
-          <div class="col-sm-3">
-            Action
-          </div>
-        </th>
-      </tr>
-    </thead>
-    <tbody id="dashboardBody">
-      {% for row in object_list %}
-      <tr>
-        <td>
-          {{ row.questionNo }}
-        </td>
-        <td>
-          <a target="_blank" href="{{ row.link }}">{{ row.questionName }}</a>
-        </td>
-        <td>  
-          {{ row.accptRate }}
-        </td>
-        <td>
-          <span class="badge rounded-pill text-bg-primary" id="type_span_{{ row.hardType }}" >{{ row.hardType }}</span>
-        </td>
-        <td>
-          {% for t in row.get_question_type %}
-            <span class="badge rounded-pill text-bg-primary" id="type_span_{{ t }}" >{{ t }}</span>
-          {% endfor %}
-        </td>
-        <td>
-          <span class="badge bg-info rounded-pill">{{ row.get_answer_count_by_num }} </span>
-        </td>
-        <td> 
-          <div class="d-grid gap-2 d-md-block">
-            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-              <button type="button" class="btn btn-secondary dropdown-toggle btn-sm" 
-              data-bs-toggle="dropdown" aria-expanded="false">
-                Action
-              </button>
-              <ul class="dropdown-menu">
-                <li>
-                  <a class="dropdown-item" onclick="addUser(this)" questionNo="{{ row.questionNo }}" ansType="1" userId="{{ user.id }}" userName="{{ user.username }}">
-                    <span class="badge rounded-pill text-bg-primary">I know, DM Me!</span>
-                  </a></li>
-                <li>
-                  <a class="dropdown-item" onclick="addUser(this)" questionNo="{{ row.questionNo }}" ansType="2" userId="{{ user.id }}" userName="{{ user.username }}">
-                    <span class="badge rounded-pill text-bg-secondary">
-                      I know...
-                    </span>
-                  </a></li>
-                <li>
-                  <a class="dropdown-item" onclick="addUser(this)" questionNo="{{ row.questionNo }}" ansType="3" userId="{{ user.id }}" userName="{{ user.username }}">
-                    <span class="badge rounded-pill text-bg-success">
-                      In my plan!
-                    </span>
-                  </a></li>
-                <li>
-                  <a class="dropdown-item" onclick="addUser(this)" questionNo="{{ row.questionNo }}" ansType="4" userId="{{ user.id }}" userName="{{ user.username }}">
-                    <span class="badge rounded-pill text-bg-danger">
-                      Help please!
-                    </span>
-                  </a></li>
-              </ul>
-              <!-- <button class="btn btn-info" type="button">View All</button> -->
-              <button id="viewButton" class="btn btn-outline-info btn-sm" type="button" 
-              data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" 
-              aria-controls="offcanvasRight" qn="{{ row.questionNo }}" 
-              currUser="{{ user.id }}" onclick="viewLeetCode(this)" 
-              questionName="{{ row.questionName }}" 
-              questionNo="{{ row.questionNo }}">View All</button>
-            </div>
-          </div>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  <div id="difficultyFilter"></div>
-  <div id="questionFilter"></div>
-  <div id="userFilter"></div>
-  <div id="currentUser">{{ user.username }}</div>
-  <div id="paginationSection">
-    {% if is_paginated %}
-      {% if page_obj.has_previous %}
-        <a class="btn btn-outline-info mb-4" href="#" data-page="1">First</a>
-        <a class="btn btn-outline-info mb-4" href="#" data-page="{{ page_obj.previous_page_number }}">Previous</a>
-      {% endif %}
-      {% for num in page_obj.paginator.page_range %}
-        {% if page_obj.number == num %}
-          <a class="btn btn-info mb-4" href="#">{{ num }}</a>
-        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-          <a class="btn btn-outline-info mb-4" href="#" data-page="{{ num }}">{{ num }}</a>
-        {% endif %}
-      {% endfor %}
-      {% if page_obj.has_next %}
-        <a class="btn btn-outline-info mb-4" href="#" data-page="{{ page_obj.next_page_number }}">Next</a>
-        <a class="btn btn-outline-info mb-4" href="#" data-page="{{ page_obj.paginator.num_pages }}">Last</a>
-      {% endif %}
-    {% endif %}
-  </div>
-  <div class="offcanvas offcanvas-end" tabindex="0" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-    <div class="offcanvas-header shadow-none p-3 mb-5 bg-light rounded">
-        <h5 id="dashboardHeader">Problem Dashboard</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  
+  <nav>
+    <div class="nav nav-tabs" id="dashboard-tab" role="tablist">
+      <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" 
+      type="button" role="tab" aria-controls="nav-home" aria-selected="true" onclick="formatStandardView(this)">
+        Standard View
+      </button>
+      <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-checkin" 
+      type="button" role="tab" aria-controls="nav-checkin" aria-selected="false" onclick="formatCheckInView(this)">
+        Check In View
+      </button>
+      <button class="nav-link" id="nav-calendar-tab" data-bs-toggle="tab" data-bs-target="#nav-calendar" 
+        type="button" role="tab" aria-controls="nav-calendar" aria-selected="false" onclick="calendarView(this)">
+        Calendar View
+      </button>
     </div>
-    <div class="offcanvas-body">
-      <div class="row align-items-start shadow-sm p-3 mb-5 bg-body rounded">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col" class="text-center">Name</th>
-              <th scope="col" class="text-center">Time Complexity</th>
-              <th scope="col" class="text-center">Space Complexity</th>
-            </tr>
-          </thead>
-        </table>
-        &nbsp;&nbsp;&nbsp;
-        
-        <div class="alert alert-info d-none d-lg-block">I Know, DM Me(老子会,问我!)</div>
-        <div class="input-group" id="inputGroup1">
-          <div class="col">
-            <div class="input-group-prepend">
-              <span class="input-group-text">Name</span>
-            </div>
-          </div>
-          <select class="custom-select" id="inputGroupSelect01" aria-label="Example select with button addon">
-            <option value="0" selected>Idk</option>
-            <option value="1">O(1)</option>
-            <option value="2">O(LogN)</option>
-            <option value="3">O(N)</option>
-            <option value="4">O(N^2)</option>
-            <option value="5">>O(N^2)</option>
-          </select>
-          <select class="custom-select" id="inputGroupSelect02" aria-label="Example select with button addon">
-            <option value="0" selected>Idk</option>
-            <option value="1">O(1)</option>
-            <option value="2">O(LogN)</option>
-            <option value="3">O(N)</option>
-            <option value="4">O(N^2)</option>
-            <option value="5">>O(N^2)</option>
-          </select>
-          <div class="btn-group" role="group">
-            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            </button>
-            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-              <a class="dropdown-item" onclick="submitDetails(this)" questionNo="" userId="{{ user.id }}">Okay</a>
-              <a class="dropdown-item" onclick="deleteDetails(this)" questionNo="" userId="{{ user.id }}">Delete</a>
-            </div>
-          </div>
-        </div>
-        <div id="insertGroup1">
-        </div>
-        &nbsp;&nbsp;&nbsp;
-        <div class="alert alert-info d-none d-lg-block">I Know...(容我再想想)</div>
-        <div class="input-group" id="inputGroup2">
-          <div class="col">
-            <div class="input-group-prepend">
-              <span class="input-group-text">Name</span>
-            </div>
-          </div>
-          <select class="custom-select" id="inputGroupSelect01" aria-label="Example select with button addon">
-            <option value="0" selected>Idk</option>
-            <option value="1">O(1)</option>
-            <option value="2">O(LogN)</option>
-            <option value="3">O(N)</option>
-            <option value="4">O(N^2)</option>
-            <option value="5">>O(N^2)</option>
-          </select>
-          <select class="custom-select" id="inputGroupSelect02" aria-label="Example select with button addon">
-            <option value="0" selected>Idk</option>
-            <option value="1">O(1)</option>
-            <option value="2">O(LogN)</option>
-            <option value="3">O(N)</option>
-            <option value="4">O(N^2)</option>
-            <option value="5">>O(N^2)</option>
-          </select>
-          <div class="btn-group" role="group">
-            <button
-              type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" 
-              aria-haspopup="true" aria-expanded="false">
-            </button>
-            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-              <a class="dropdown-item" onclick="submitDetails(this)" questionNo="" userId="{{ user.id }}">Okay</a>
-              <a class="dropdown-item" onclick="deleteDetails(this)" questionNo="" userId="{{ user.id }}">Delete</a>
-            </div>
-          </div>
-        </div>
-        <div id="insertGroup2">
-        </div>
-        &nbsp;&nbsp;&nbsp;
-        <div class="alert alert-info d-none d-lg-block">In my Plan(还没做)</div>
-        <div class="input-group" id="inputGroup3">
-          <div class="col">
-            <div class="input-group-prepend">
-              <span class="input-group-text">Name</span>
-            </div>
-          </div>
-          <div class="btn-group" role="group">
-            <button
-              type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" 
-              aria-haspopup="true" aria-expanded="false">
-            </button>
-            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-              <a class="dropdown-item" onclick="deleteDetails(this)" questionNo="" userId="{{ user.id }}">Delete</a>
-            </div>
-          </div>          
-        </div>
-        <div id="insertGroup3">
-        </div>
-        &nbsp;&nbsp;&nbsp;
-        <div class="alert alert-info d-none d-lg-block">Help please(救救孩子吧)</div>
-        <div class="input-group" id="inputGroup4">
-          <div class="col">
-            <div class="input-group-prepend">
-              <span class="input-group-text">Name</span>
-            </div>
-          </div>
-          <div class="btn-group" role="group">
-            <button
-              type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" 
-              aria-haspopup="true" aria-expanded="false">
-            </button>
-            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-              <a class="dropdown-item" onclick="deleteDetails(this)" questionNo="" userId="{{ user.id }}">Delete</a>
-            </div>
-          </div>          
-        </div>
-        <div id="insertGroup4">
-        </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+    <!-- This is the standard table view -->
+    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+      {% include "dashboard/standardTable.html" %}
     </div>
+    <div class="tab-pane fade" id="nav-checkin" role="tabpanel" aria-labelledby="nav-checkin-tab" tabindex="0">
+      {% include "dashboard/checkinTable.html" %}
+    </div>
+    <div class="tab-pane fade" id="nav-calendar" role="tabpanel" aria-labelledby="nav-calendar-tab" tabindex="0">
+      {% include "dashboard/calendarTable.html" %}
     </div>
   </div>
+  
+  <div style="display: none;" id="currentUser">{{ user.username }}</div>
+  <div style="display: none;" id="userDiscordId">{{ user.profile.discordId }}</div>
+
+  {% include "dashboard/reviewboard.html" %}
+  {% include "dashboard/checkinboard.html" %}
 </body>
 {% endblock content %}

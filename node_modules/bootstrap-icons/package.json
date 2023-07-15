@@ -1,0 +1,119 @@
+{
+  "_from": "bootstrap-icons",
+  "_id": "bootstrap-icons@1.10.5",
+  "_inBundle": false,
+  "_integrity": "sha512-oSX26F37V7QV7NCE53PPEL45d7EGXmBgHG3pDpZvcRaKVzWMqIRL9wcqJUyEha1esFtM3NJzvmxFXDxjJYD0jQ==",
+  "_location": "/bootstrap-icons",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "bootstrap-icons",
+    "name": "bootstrap-icons",
+    "escapedName": "bootstrap-icons",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/bootstrap-icons/-/bootstrap-icons-1.10.5.tgz",
+  "_shasum": "5a1bbb1bb2212397d416587db1d422cc9501847c",
+  "_spec": "bootstrap-icons",
+  "_where": "/Users/yingxie/Documents/Git/Python/LeetCodeDashboard/leetcodeboard",
+  "author": {
+    "name": "mdo"
+  },
+  "bugs": {
+    "url": "https://github.com/twbs/icons/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Official open source SVG icon library for Bootstrap",
+  "devDependencies": {
+    "@twbs/fantasticon": "^2.7.1",
+    "autoprefixer": "^10.4.14",
+    "bootstrap": "^5.3.0-alpha3",
+    "clean-css-cli": "^5.6.2",
+    "clipboard": "^2.0.11",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.39.0",
+    "find-unused-sass-variables": "^4.0.8",
+    "fuse.js": "^6.6.2",
+    "hugo-bin": "^0.102.0",
+    "lockfile-lint": "^4.10.1",
+    "npm-run-all2": "^6.0.5",
+    "picocolors": "^1.0.0",
+    "postcss": "^8.4.23",
+    "postcss-cli": "^10.1.0",
+    "stylelint": "^15.6.0",
+    "stylelint-config-twbs-bootstrap": "^9.0.1",
+    "svg-sprite": "^3.0.0-beta1",
+    "svgo": "^3.0.2",
+    "vnu-jar": "23.4.11"
+  },
+  "files": [
+    "icons/*.svg",
+    "bootstrap-icons.svg",
+    "font",
+    "!.DS_Store"
+  ],
+  "funding": [
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/twbs"
+    },
+    {
+      "type": "opencollective",
+      "url": "https://opencollective.com/bootstrap"
+    }
+  ],
+  "homepage": "https://icons.getbootstrap.com/",
+  "hugo-bin": {
+    "buildTags": "extended"
+  },
+  "keywords": [
+    "bootstrap",
+    "icons",
+    "svg",
+    "font",
+    "sprite",
+    "woff",
+    "woff2"
+  ],
+  "license": "MIT",
+  "name": "bootstrap-icons",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/twbs/icons.git"
+  },
+  "sass": "font/bootstrap-icons.scss",
+  "scripts": {
+    "docs-build": "hugo --cleanDestinationDir --printUnusedTemplates",
+    "docs-serve": "hugo server --port 4000 --disableFastRender",
+    "docs-test": "npm-run-all docs-build docs-test:vnu",
+    "docs-test:vnu": "node build/vnu-jar.mjs",
+    "icons": "npm-run-all icons-main --aggregate-output --parallel icons-sprite icons-font",
+    "icons-font": "npm-run-all icons-font-*",
+    "icons-font-main": "fantasticon",
+    "icons-font-min": "cleancss -O1 --format breakWith=lf --with-rebase --output font/bootstrap-icons.min.css font/bootstrap-icons.css",
+    "icons-main": "node build/build-svgs.mjs",
+    "icons-sprite": "svg-sprite --config svg-sprite.json --log=info \"icons/*.svg\"",
+    "icons-zip": "cross-env-shell \"rm -rf bootstrap-icons-$npm_package_version bootstrap-icons-$npm_package_version.zip && cp -r icons/ bootstrap-icons-$npm_package_version && cp bootstrap-icons.svg bootstrap-icons-$npm_package_version && cp -r font/ bootstrap-icons-$npm_package_version && zip -qr9 bootstrap-icons-$npm_package_version.zip bootstrap-icons-$npm_package_version && rm -rf bootstrap-icons-$npm_package_version\"",
+    "netlify": "cross-env-shell HUGO_BASEURL=$DEPLOY_PRIME_URL npm-run-all icons docs-build",
+    "pages": "node build/build-pages.mjs",
+    "release": "npm-run-all icons docs-build icons-zip",
+    "release-version": "node build/bump-version.js",
+    "start": "npm run docs-serve",
+    "test": "npm-run-all --parallel --aggregate-output --continue-on-error test:*",
+    "test:check-icons": "node build/check-icons.mjs",
+    "test:eslint": "eslint --cache --cache-location .cache/.eslintcache --report-unused-disable-directives --ext .js,.mjs .",
+    "test:fusv": "fusv docs/assets/scss/",
+    "test:lockfile-lint": "lockfile-lint --allowed-hosts npm --allowed-schemes https: --empty-hostname false --type npm --path package-lock.json",
+    "test:stylelint": "stylelint docs/assets/scss/ --cache --cache-location .cache/.stylelintcache"
+  },
+  "style": "font/bootstrap-icons.css",
+  "version": "1.10.5"
+}

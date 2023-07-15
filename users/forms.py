@@ -25,3 +25,19 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = []
+
+
+class UserDiscordUpdateForm(forms.ModelForm):
+    discordId = forms.CharField()
+    discordName = forms.CharField()
+
+    class Meta:
+        model = User
+        fields = ['discordId', 'discordName']
+
+
+class UserProfileUpdateForm(forms.ModelForm):
+
+    class Meta:
+        model = Profile
+        fields = ['discordId', 'discordName']

@@ -1,0 +1,135 @@
+{% block standardTable %}
+<table class="table table-bordered table-condensed" id="standardViewTable">
+  <thead class="font-monospace">
+    <tr>
+      <th style="width: 2%">
+        <div class="col-sm-1">
+          #
+        </div>
+      </th>
+      <th style="width: 26%">
+        <div class="col-sm-3">
+          Subject
+        </div>
+      </th>
+      <th style="width: 2%">
+        <div class="col-sm-3">
+          Rate
+        </div>
+      </th>
+      <th style="width: 2%">
+        <div class="col-sm-3">
+          Difficult
+        </div>
+      </th>
+      <th style="width: 25%">
+        <div class="col-sm-3">
+          Type
+        </div>
+      </th>
+      <th style="width: 5%">
+        <div class="col-sm-3">
+          Users
+        </div>
+      </th>
+      <th style="width: 16%">
+        <div class="col-sm-3">
+          Action
+        </div>
+      </th>
+    </tr>
+  </thead>
+  <tbody id="standardViewBody">
+    {% for row in object_list %}
+    <tr>
+      <td>
+        {{ row.questionNo }}
+      </td>
+      <td>
+        <a target="_blank" href="{{ row.link }}">{{ row.questionName }}</a>
+      </td>
+      <td>  
+        {{ row.accptRate }}
+      </td>
+      <td>
+        <span class="badge rounded-pill text-bg-primary" id="type_span_{{ row.hardType }}" >{{ row.hardType }}</span>
+      </td>
+      <td>
+        {% for t in row.get_question_type %}
+          <span class="badge rounded-pill text-bg-primary" id="type_span_{{ t }}" >{{ t }}</span>
+        {% endfor %}
+      </td>
+      <td>
+        <span id="questionNoCount_{{ row.questionNo }}" class="badge bg-info rounded-pill">{{ row.get_answer_count_by_num }} </span>
+      </td>
+      <td> 
+        <div class="d-grid gap-2 d-md-block">
+          <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+            <button type="button" class="btn btn-secondary dropdown-toggle btn-sm" 
+            data-bs-toggle="dropdown" aria-expanded="false">
+              Action
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" onclick="addUser(this)" questionNo="{{ row.questionNo }}" ansType="1" userId="{{ user.id }}" userName="{{ user.username }}">
+                  <span class="badge rounded-pill text-bg-primary">I know, DM Me!</span>
+                </a></li>
+              <li>
+                <a class="dropdown-item" onclick="addUser(this)" questionNo="{{ row.questionNo }}" ansType="2" userId="{{ user.id }}" userName="{{ user.username }}">
+                  <span class="badge rounded-pill text-bg-secondary">
+                    I know
+                  </span>
+                </a></li>
+              <li>
+                <a class="dropdown-item" onclick="addUser(this)" questionNo="{{ row.questionNo }}" ansType="3" userId="{{ user.id }}" userName="{{ user.username }}">
+                  <span class="badge rounded-pill text-bg-success">
+                    In my plan!
+                  </span>
+                </a></li>
+              <li>
+                <a class="dropdown-item" onclick="addUser(this)" questionNo="{{ row.questionNo }}" ansType="4" userId="{{ user.id }}" userName="{{ user.username }}">
+                  <span class="badge rounded-pill text-bg-danger">
+                    Please Help!
+                  </span>
+                </a></li>
+            </ul>
+            <!-- <button class="btn btn-info" type="button">View All</button> -->
+            <button id="viewButton" class="btn btn-outline-info btn-sm" type="button"
+            data-bs-toggle="offcanvas" data-bs-target="#offViewRight" 
+            aria-controls="offcanvasRight" qn="{{ row.questionNo }}" 
+            currUser="{{ user.id }}" onclick="viewLeetCode(this)" 
+            questionName="{{ row.questionName }}" 
+            questionNo="{{ row.questionNo }}">View All</button>
+            <button id="checkButton" class="btn btn-outline-success btn-sm" type="button" 
+            data-bs-toggle="offcanvas" data-bs-target="#offCheckRight" 
+            aria-controls="offcanvasRight" qn="{{ row.questionNo }}" 
+            currUser="{{ user.id }}" onclick="viewCheckin(this)" 
+            questionName="{{ row.questionName }}" 
+            questionNo="{{ row.questionNo }}">Check In</button>
+          </div>
+        </div>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<div id="paginationSection">
+  {% if is_paginated %}
+    {% if page_obj.has_previous %}
+      <a class="btn btn-outline-info mb-4" href="#" data-page="1">First</a>
+      <a class="btn btn-outline-info mb-4" href="#" data-page="{{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+    {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.number == num %}
+        <a class="btn btn-info mb-4" href="#">{{ num }}</a>
+      {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+        <a class="btn btn-outline-info mb-4" href="#" data-page="{{ num }}">{{ num }}</a>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+      <a class="btn btn-outline-info mb-4" href="#" data-page="{{ page_obj.next_page_number }}">Next</a>
+      <a class="btn btn-outline-info mb-4" href="#" data-page="{{ page_obj.paginator.num_pages }}">Last</a>
+    {% endif %}
+  {% endif %}
+</div>
+{% endblock %}

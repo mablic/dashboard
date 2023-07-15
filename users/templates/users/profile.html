@@ -6,6 +6,8 @@
       <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
       <div class="media-body">
         <h2 class="account-heading">{{ user.username }}</h2>
+        <p class="text-s">Discord Name: <mark>{{ user.profile.discordName }}</mark></p>
+        <p class="text-s">Discord Id: <mark>{{ user.profile.discordId }}</mark></p>
         <p class="text-secondary">{{ user.email }}</p>
       </div>
     </div>
@@ -18,6 +20,7 @@
         </fieldset>
         <div class="form-group">
             <button class="btn btn-outline-info" type="submit">Update</button>
+            <a href="{% url 'authorize' %}" class="btn btn-outline-info">Link Discord Account</a>
         </div>
     </form>
   </div>

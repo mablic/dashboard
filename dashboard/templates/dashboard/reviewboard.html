@@ -1,0 +1,135 @@
+{% block reviewboard %}
+
+<div class="offcanvas offcanvas-end" tabindex="0" id="offViewRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header shadow-none p-3 mb-5 bg-light rounded">
+      <h5 id="dashboardHeader">Problem Dashboard</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="row align-items-start shadow-sm p-3 mb-5 bg-body rounded">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" class="text-center">Name</th>
+            <th scope="col" class="text-center">Time Complexity</th>
+            <th scope="col" class="text-center">Space Complexity</th>
+          </tr>
+        </thead>
+      </table>
+      &nbsp;&nbsp;&nbsp;
+      
+      <div class="alert alert-info d-none d-lg-block">I Know, DM Me</div>
+      <div class="input-group" id="inputGroup1">
+        <div class="col">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Name</span>
+          </div>
+        </div>
+        <select class="custom-select" id="inputGroupSelect01" aria-label="Example select with button addon">
+          <option value="0" selected>Idk</option>
+          <option value="1">O(1)</option>
+          <option value="2">O(LogN)</option>
+          <option value="3">O(N)</option>
+          <option value="4">O(N^2)</option>
+          <option value="5">>O(N^2)</option>
+        </select>
+        <select class="custom-select" id="inputGroupSelect02" aria-label="Example select with button addon">
+          <option value="0" selected>Idk</option>
+          <option value="1">O(1)</option>
+          <option value="2">O(LogN)</option>
+          <option value="3">O(N)</option>
+          <option value="4">O(N^2)</option>
+          <option value="5">>O(N^2)</option>
+        </select>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          </button>
+          <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+            <a class="dropdown-item" onclick="submitDetails(this)" questionNo="" userId="{{ user.id }}">Okay</a>
+            <a class="dropdown-item" onclick="deleteDetails(this)" questionNo="" userId="{{ user.id }}">Delete</a>
+          </div>
+        </div>
+      </div>
+      <div id="insertGroup1">
+      </div>
+      &nbsp;&nbsp;&nbsp;
+      <div class="alert alert-info d-none d-lg-block">I Know</div>
+      <div class="input-group" id="inputGroup2">
+        <div class="col">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Name</span>
+          </div>
+        </div>
+        <select class="custom-select" id="inputGroupSelect01" aria-label="Example select with button addon">
+          <option value="0" selected>Idk</option>
+          <option value="1">O(1)</option>
+          <option value="2">O(LogN)</option>
+          <option value="3">O(N)</option>
+          <option value="4">O(N^2)</option>
+          <option value="5">>O(N^2)</option>
+        </select>
+        <select class="custom-select" id="inputGroupSelect02" aria-label="Example select with button addon">
+          <option value="0" selected>Idk</option>
+          <option value="1">O(1)</option>
+          <option value="2">O(LogN)</option>
+          <option value="3">O(N)</option>
+          <option value="4">O(N^2)</option>
+          <option value="5">>O(N^2)</option>
+        </select>
+        <div class="btn-group" role="group">
+          <button
+            type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" 
+            aria-haspopup="true" aria-expanded="false">
+          </button>
+          <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+            <a class="dropdown-item" onclick="submitDetails(this)" questionNo="" userId="{{ user.id }}">Okay</a>
+            <a class="dropdown-item" onclick="deleteDetails(this)" questionNo="" userId="{{ user.id }}">Delete</a>
+          </div>
+        </div>
+      </div>
+      <div id="insertGroup2">
+      </div>
+      &nbsp;&nbsp;&nbsp;
+      <div class="alert alert-info d-none d-lg-block">In my Plan</div>
+      <div class="input-group" id="inputGroup3">
+        <div class="col">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Name</span>
+          </div>
+        </div>
+        <div class="btn-group" role="group">
+          <button
+            type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" 
+            aria-haspopup="true" aria-expanded="false">
+          </button>
+          <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+            <a class="dropdown-item" onclick="deleteDetails(this)" questionNo="" userId="{{ user.id }}">Delete</a>
+          </div>
+        </div>          
+      </div>
+      <div id="insertGroup3">
+      </div>
+      &nbsp;&nbsp;&nbsp;
+      <div class="alert alert-info d-none d-lg-block">Please Help</div>
+      <div class="input-group" id="inputGroup4">
+        <div class="col">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Name</span>
+          </div>
+        </div>
+        <div class="btn-group" role="group">
+          <button
+            type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" 
+            aria-haspopup="true" aria-expanded="false">
+          </button>
+          <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+            <a class="dropdown-item" onclick="deleteDetails(this)" questionNo="" userId="{{ user.id }}">Delete</a>
+          </div>
+        </div>          
+      </div>
+      <div id="insertGroup4">
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -54,3 +54,18 @@ class UserAnswer(models.Model):
 
     def __str__(self):
         return "leetCode:" + str(self.leetCodeNo) + "; userName:" + str(self.userName)
+
+
+class CheckIn(models.Model):
+    checkInTime = models.DateField()
+    userName = models.CharField(max_length=255)
+    userId = models.CharField(max_length=50, default=0)
+    userDiscordId = models.CharField(max_length=100)
+    checkInDiscordServer = models.CharField(max_length=100)
+    checkInDiscordChannel = models.CharField(max_length=200)
+    questionNo = models.CharField(max_length=20)
+    notificationFlag = models.BooleanField()
+    tmrFlag = models.BooleanField()
+
+    def __str__(self):
+        return "UserName:" + str(self.userName) + "; userId:" + str(self.userDiscordId) + "; Time:" +str(self.checkInTime)

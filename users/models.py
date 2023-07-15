@@ -6,6 +6,8 @@ class Profile(models.Model):
     # id = models.AutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    discordId = models.CharField(max_length=255, blank=True, null=True)
+    discordName = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return f'{self.user.username} Profile'

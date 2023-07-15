@@ -1,43 +1,95 @@
 {% extends "dashboard/base.html" %}
 {% block content %}
+{% load static %}
 <div class="objectives-section">
+  <main>
 
-    <main>
-        <div class="container py-4">
-          <header class="pb-3 mb-4 border-bottom">
-            <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
-              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="32" fill="currentColor" class="bi bi-info-square-fill" viewBox="0 0 16 16">
-                <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.93 4.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-              </svg>
-              <span class="fs-4">Welcome</span>
-            </a>
-          </header>
-      
-          <div class="p-5 mb-4 bg-light rounded-3">
-            <div class="container-fluid py-5">
-              <h1 class="display-5 fw-bold">Join Discord</h1>
-              <p class="col-md-12 fs-4">
-                Welcome to our website, a platform designed to support your learning and development in software engineering and finance. Our website offers a comprehensive knowledge hub that includes a wide range of LeetCode problems, FRM(TBD), and CFA(TBD) topics to help you develop and hone your skills at any level of expertise.
+    <!-- Hero Section -->
+    <section class="bg-light text-dark overflow-hidden">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 mx-auto text-center">
+            <h1 class="display-4 text-uppercase mb-4" style="font-family: 'STCaiyun', cursive; font-style: italic">Study & Connect</h1>
+            <p class="lead font-italic">Unite. Learn. Succeed.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="bg-primary text-white py-5">
+      <div class="container text-center">
+        <h2 class="display-4 text-uppercase mb-4" style="font-style: italic">Join our Community</h2>
+        <p class="lead">Connect with like-minded individuals, participate in discussions, and enhance your learning journey by joining our Discord community.</p>
+        <a href='https://discord.gg/mBCxFK4tNu' target="_blank" class="btn btn-light btn-lg">Join Discord</a>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mb-4">
+          <div class="card h-100 bg-primary text-white">
+            <div class="card-body">
+              <h4 class="card-title text-uppercase mb-4">Comprehensive View</h4>
+              <p class="card-text">
+                Explore a comprehensive table of LeetCode problems with success rates, difficulty levels, question types, and user engagement. Check-in your progress and review problems at a glance.
               </p>
             </div>
           </div>
-      
-          <div class="row align-items-md-stretch">
-            <div class="col-md-6">
-              <div class="h-100 p-5 text-bg-dark rounded-3">
-                <h2>Build a Comprehensive Knowledge Hub</h2>
-                <p>Comprehensive knowledge hub for professionals in the software engineering and finance industries. With a focus on LeetCode problems, FRM, and CRM topics, your website seeks to provide users with access to a wide range of problems that can help them develop and hone their skills. By offering a broad range of challenges, the website aims to cater to users at different levels of expertise, from beginners to advanced learners.</p>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="h-100 p-5 bg-light border rounded-3">
-                <h2>Foster a Collaborative Learning Environment</h2>
-                <p>create a collaborative learning environment that enables users to connect with one another and support each other's growth. By allowing users to mark their progress on each problem and connect with others who have already solved it, the website encourages users to share their knowledge and help each other learn. This approach fosters a sense of community and helps to make the learning process more engaging and enjoyable.</p>
-            </div>
+        </div>
+        <div class="col-lg-8 mb-4">
+          <div class="card h-100">
+            <img src="{% get_media_prefix %}Feature1.png" class="card-img" alt="Phone Image 1">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-8 mb-4">
+          <div class="card h-100">
+            <img src="{% get_media_prefix %}Feature2.png" class="card-img" alt="Phone Image 2">
+          </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+          <div class="card h-100">
+            <div class="card-body bg-primary text-white">
+              <h4 class="card-title text-uppercase mb-4">Track Progress</h4>
+              <p class="card-text">
+                Track your LeetCode progress with user check-ins. Expand or collapse the view by date for an easy overview of your check-in history and progress.
+              </p>
             </div>
           </div>
         </div>
-      </main>
-    <h2></h2>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 mb-4">
+          <div class="card h-100">
+            <div class="card-body bg-primary text-white">
+              <h4 class="card-title text-uppercase mb-4">Monitor Journey Effortlessly</h4>
+              <p class="card-text">
+                Visualize your LeetCode check-ins on a calendar view. Easily track and review your study progress, stay motivated, and gain insights into your learning journey with a comprehensive calendar visualization.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8 mb-4">
+          <div class="card h-100">
+            <img src="{% get_media_prefix %}Feature3.png" class="card-img" alt="Phone Image 3">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- Footer -->
+    <footer class="bg-light py-3 text-center">
+      <div class="container">
+        <p>&copy; 2022 Dashboard All rights reserved.</p>
+      </div>
+    </footer>
+  </main>
+</div>
+
 
 {% endblock content %}

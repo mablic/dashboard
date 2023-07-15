@@ -1,0 +1,98 @@
+{% block filterboard %}
+
+<div class="container fixed-body" id="filterContainer">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="btn-group">
+        {% if user.is_authenticated %}
+          <button type="button" onclick="filterByUser(this)" value="all_user_filter" 
+            urlValue="{% url 'dashboard' %}" class="btn btn-outline-secondary">ALL</button>
+          <button type="button" onclick="filterByUser(this)" value="{{ user.username }}" 
+            urlValue="{% url 'dashboard' %}" class="btn btn-outline-secondary">Me</button>
+        {% else %}
+          <button type="button" onclick="filterByUser(this)" value="all_user_filter" 
+          urlValue="{% url 'dashboard' %}" class="btn btn-outline-secondary">ALL</button>
+        {% endif %}
+        <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Difficult
+        </button>
+        <div id="difficult-list-group" class="dropdown-menu">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <input id="checkerBox" onclick="addDifficultFilter(this)" class="form-check-input me-1" 
+              type="checkbox" value="All">
+              <button type="button" class="badge text-bg-secondary" disabled>All</button>
+            </li>
+            <li class="list-group-item">
+              <input id="checkerBox" onclick="addDifficultFilter(this)" class="form-check-input me-1" 
+              type="checkbox" value="Easy">
+              <button type="button" id="type_span_Easy" disabled>Easy</button>
+            </li>
+            <li class="list-group-item">
+              <input id="checkerBox" onclick="addDifficultFilter(this)" class="form-check-input me-1" 
+              type="checkbox" value="Medium">
+              <button type="button" id="type_span_Medium" disabled>Medium</button>
+            </li>
+            <!-- templateURL="{{ request.build_absolute_uri }}" -->
+            <li class="list-group-item">
+              <input id="checkerBox" onclick="addDifficultFilter(this)" class="form-check-input me-1" 
+              type="checkbox" value="Hard">
+              <button type="button" id="type_span_Hard" disabled>Hard</button>
+            </li>
+          </ul>
+        </div>
+
+        <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Question Type
+        </button>
+        <div id="type-list-group" class="dropdown-menu">
+          <ul class="list-group" id="difficultListGroup">
+            <li class="list-group-item">
+              <div class="form-check">
+                <input class="form-check-input" onclick="addQuestionFilter(this)" type="radio" 
+                  name="flexRadioDefault" value="All">
+                <button class="badge text-bg-info" for="flexRadioDefault1" disabled>
+                  All
+                </button>
+              </div>
+            </li>
+            {% for type in typeList %}
+              <li class="list-group-item">
+                <div class="form-check">
+                  <input class="form-check-input" onclick="addQuestionFilter(this)" type="radio" 
+                    name="flexRadioDefault" value="{{ type }}">
+                  <button class="badge text-bg-secondary" for="flexRadioDefault1" disabled>
+                    {{ type }}
+                  </button>
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="btn-group">
+        <button class="badge text-bg-secondary" for="flexRadioDefault1" disabled>Check In Filter</button>
+        <input type="text" class="form-control" id="startDatePicker" name="from" placeholder="Select From">
+        <input type="text" class="form-control" id="endDatePicker" placeholder="Select To">
+      </div>
+    </div>
+    <div class="col-sm-2 d-flex justify-content-end">
+      <button type="button" class="btn btn-outline-secondary" id="exportToExcel" aria-haspopup="true" aria-expanded="false">
+        Export to Excel
+      </button>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-12">
+      <input type="text" class="form-control" placeholder="Search for Question" oninput="debounceInput()" id="textFilter">
+    </div>    
+  </div>
+</div>
+<!-- <div style="display: none;" id="difficultyFilter"></div>
+<div style="display: none;" id="questionFilter"></div>
+<div style="display: none;" id="userFilter"></div> -->
+{% endblock %}
+  

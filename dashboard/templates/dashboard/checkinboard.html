@@ -1,0 +1,47 @@
+{% block checkinboard %}
+<!-- check in section -->
+<div class="offcanvas offcanvas-end" tabindex="0" id="offCheckRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header shadow-none p-3 mb-5 bg-light rounded">
+        <h5 id="checkInHeader">Check-In Dashboard</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="row align-items-start shadow-sm p-3 mb-5 bg-body rounded">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col" class="text-center">Check-In Time</th>
+              <th>
+                <button type="button" id="checkInButton" class="btn btn-success" 
+                onclick="addCheckInCheck(this)" currUser="{{ user.id }}" 
+                questionNo=""
+                checkType="add">
+                  <i class="bi bi-calendar-check-fill"></i>
+                </button>
+              </th>
+            </tr>
+          </thead>
+        </table>
+        &nbsp;&nbsp;&nbsp;
+        <div class="input-group" id="checkIn0" style="display: none;">
+            <div class="col" style="flex: 0 0 80%;">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Name</span>
+              </div>
+            </div>
+            <div class="col" style="flex: 0 0 20%;">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-danger" 
+                id="checkInDelete" onclick="addCheckInCheck(this)" 
+                questionNo="" currUser="{{ user.id }}" checkType="delete">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </div>
+        </div>
+        <div id="newCheckIn">
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

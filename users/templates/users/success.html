@@ -1,0 +1,5 @@
+{% extends "dashboard/base.html" %}
+{% block content %}
+    <h1>Welcome: {{ userName }}</h1>
+    <a href="{% url 'profile' %}">Profile</a>
+{% endblock content %}

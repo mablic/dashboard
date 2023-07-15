@@ -1,0 +1,140 @@
+{% block checkinTable %}
+<table class="table table-bordered table-condensed" id="checkInViewTable">
+  <thead class="font-monospace">
+    <tr>
+      <th style="width: 2%">
+        <div class="col-sm-1">
+          #
+        </div>
+      </th>
+      <th style="width: 15%">
+        <div class="col-sm-3">
+          CheckIn Date
+        </div>
+      </th>
+      <th style="width: 30%">
+        <div class="col-sm-3">
+          Subject
+        </div>
+      </th>
+      <th style="width: 2%">
+        <div class="col-sm-3">
+          Rate
+        </div>
+      </th>
+      <th style="width: 2%">
+        <div class="col-sm-3">
+          Difficult
+        </div>
+      </th>
+      <th style="width: 20%">
+        <div class="col-sm-3">
+          Type
+        </div>
+      </th>
+      <th style="width: 5%">
+        <div class="col-sm-3">
+          Users
+        </div>
+      </th>
+      <th style="width: 24%">
+        <div class="col-sm-3">
+          Action
+        </div>
+      </th>
+    </tr>
+  </thead>
+  <tbody id="checkInViewBody">
+    {% for row in object_list %}
+    {% with parentCounter=forloop.counter %}
+    <tr data-toggle="collapse" data-target="#collapse{{ parentCounter }}" class="accordion-toggle" onclick="toggleChildRowsVisibility('{{ parentCounter }}')">
+      <td style="background-color: #f2f2f2d3;"><strong>{{ parentCounter }}</strong></td>
+      <td colspan="7" style="background-color: #f2f2f2d3;"><strong>{{ row.dateTime }}</strong></td>
+    </tr>
+      {% for itm in row.items %}
+      <tr id="childRows{{ parentCounter }}" style="display: none;">
+        <td colspan="1" class="hiddenRow"><div class="accordian-body collapse" id="collapse{{ parentCounter }}"></div></td>
+        <td colspan="1" class="hiddenRow">
+          <div class="accordian-body collapse" id="collapse{{ parentCounter }}"> 
+            LeetCode - {{ itm.questionNo}} 
+          </div> 
+        </td>
+        <td colspan="1" class="hiddenRow">
+          <div class="accordian-body collapse" id="collapse{{ parentCounter }}"> 
+            <a target="_blank" href="{{ itm.link}}">{{ itm.questionName}}</a>
+          </div> 
+        </td>
+        <td colspan="1" class="hiddenRow"><div class="accordian-body collapse" id="collapse{{ parentCounter }}"> {{ itm.accptRate}} </div> </td>
+
+        <td colspan="1" class="hiddenRow">
+          <div class="accordian-body collapse" id="collapse{{ parentCounter }}">
+            <span class="badge rounded-pill text-bg-primary" id="type_span_{{ itm.hardType }}" >{{ itm.hardType }}
+            </span>
+          </div>
+        </td>
+        <td colspan="1" class="hiddenRow">
+          <div class="accordian-body collapse" id="collapse{{ parentCounter }}"> 
+          {% for t in itm.get_question_type %}
+            <span class="badge rounded-pill text-bg-primary" id="type_span_{{ t }}" >{{ t }}</span>
+          {% endfor %}
+          </div> 
+        </td>
+        <td colspan="1" class="hiddenRow"><div class="accordian-body collapse" id="collapse{{ parentCounter }}">
+          <span id="questionNoCount_{{ itm.questionNo }}" class="badge bg-info rounded-pill">{{ itm.get_answer_count_by_num }} </span></div>
+        </td>
+        <td colspan="1" class="hiddenRow">
+          <div class="accordian-body collapse" id="collapse{{ parentCounter }}"> 
+            <div class="d-grid gap-2 d-md-block">
+              <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                <button type="button" class="btn btn-secondary dropdown-toggle btn-sm" 
+                data-bs-toggle="dropdown" aria-expanded="false">
+                  Action
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" onclick="addUser(this)" questionNo="{{ itm.questionNo }}" ansType="1" userId="{{ user.id }}" userName="{{ user.username }}">
+                      <span class="badge rounded-pill text-bg-primary">I know, DM Me!</span>
+                    </a></li>
+                  <li>
+                    <a class="dropdown-item" onclick="addUser(this)" questionNo="{{ itm.questionNo }}" ansType="2" userId="{{ user.id }}" userName="{{ user.username }}">
+                      <span class="badge rounded-pill text-bg-secondary">
+                        I know
+                      </span>
+                    </a></li>
+                  <li>
+                    <a class="dropdown-item" onclick="addUser(this)" questionNo="{{ itm.questionNo }}" ansType="3" userId="{{ user.id }}" userName="{{ user.username }}">
+                      <span class="badge rounded-pill text-bg-success">
+                        In my plan!
+                      </span>
+                    </a></li>
+                  <li>
+                    <a class="dropdown-item" onclick="addUser(this)" questionNo="{{ itm.questionNo }}" ansType="4" userId="{{ user.id }}" userName="{{ user.username }}">
+                      <span class="badge rounded-pill text-bg-danger">
+                        Please Help!
+                      </span>
+                    </a></li>
+                </ul>
+                <!-- <button class="btn btn-info" type="button">View All</button> -->
+                <button id="viewButton" class="btn btn-outline-info btn-sm" type="button"
+                data-bs-toggle="offcanvas" data-bs-target="#offViewRight" 
+                aria-controls="offcanvasRight" qn="{{ itm.questionNo }}" 
+                currUser="{{ user.id }}" onclick="viewLeetCode(this)" 
+                questionName="{{ itm.questionName }}" 
+                questionNo="{{ itm.questionNo }}">View All</button>
+                <button id="checkButton" class="btn btn-outline-success btn-sm" type="button" 
+                data-bs-toggle="offcanvas" data-bs-target="#offCheckRight" 
+                aria-controls="offcanvasRight" qn="{{ itm.questionNo }}" 
+                currUser="{{ user.id }}" onclick="viewCheckin(this)" 
+                questionName="{{ itm.questionName }}" 
+                questionNo="{{ itm.questionNo }}">Check In</button>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    {% endwith %}
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
