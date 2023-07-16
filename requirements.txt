@@ -8,6 +8,7 @@ django-crispy-forms==1.7.2
 django-heroku==0.3.1
 django-on-heroku==1.1.2
 django-storages==1.7.1
+djongo==1.3.6
 docutils==0.14
 gunicorn==19.9.0
 idna==2.7
