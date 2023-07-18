@@ -13,61 +13,64 @@
           <button type="button" onclick="filterByUser(this)" value="all_user_filter" 
           urlValue="{% url 'dashboard' %}" class="btn btn-outline-secondary">ALL</button>
         {% endif %}
-        <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Difficult
-        </button>
-        <div id="difficult-list-group" class="dropdown-menu">
-          <ul class="list-group">
-            <li class="list-group-item">
-              <input id="checkerBox" onclick="addDifficultFilter(this)" class="form-check-input me-1" 
-              type="checkbox" value="All">
-              <button type="button" class="badge text-bg-secondary" disabled>All</button>
-            </li>
-            <li class="list-group-item">
-              <input id="checkerBox" onclick="addDifficultFilter(this)" class="form-check-input me-1" 
-              type="checkbox" value="Easy">
-              <button type="button" id="type_span_Easy" disabled>Easy</button>
-            </li>
-            <li class="list-group-item">
-              <input id="checkerBox" onclick="addDifficultFilter(this)" class="form-check-input me-1" 
-              type="checkbox" value="Medium">
-              <button type="button" id="type_span_Medium" disabled>Medium</button>
-            </li>
-            <!-- templateURL="{{ request.build_absolute_uri }}" -->
-            <li class="list-group-item">
-              <input id="checkerBox" onclick="addDifficultFilter(this)" class="form-check-input me-1" 
-              type="checkbox" value="Hard">
-              <button type="button" id="type_span_Hard" disabled>Hard</button>
-            </li>
-          </ul>
+        <div class="btn-group">
+          <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Difficult
+          </button>
+          <div id="difficult-list-group" class="dropdown-menu">
+            <ul class="list-group">
+              <li class="list-group-item">
+                <input id="checkerBox" onclick="addDifficultFilter(this)" class="form-check-input me-1" 
+                type="checkbox" value="All">
+                <button type="button" class="badge text-bg-secondary" disabled>All</button>
+              </li>
+              <li class="list-group-item">
+                <input id="checkerBox" onclick="addDifficultFilter(this)" class="form-check-input me-1" 
+                type="checkbox" value="Easy">
+                <button type="button" id="type_span_Easy" disabled>Easy</button>
+              </li>
+              <li class="list-group-item">
+                <input id="checkerBox" onclick="addDifficultFilter(this)" class="form-check-input me-1" 
+                type="checkbox" value="Medium">
+                <button type="button" id="type_span_Medium" disabled>Medium</button>
+              </li>
+              <!-- templateURL="{{ request.build_absolute_uri }}" -->
+              <li class="list-group-item">
+                <input id="checkerBox" onclick="addDifficultFilter(this)" class="form-check-input me-1" 
+                type="checkbox" value="Hard">
+                <button type="button" id="type_span_Hard" disabled>Hard</button>
+              </li>
+            </ul>
+          </div>
         </div>
-
-        <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Question Type
-        </button>
-        <div id="type-list-group" class="dropdown-menu">
-          <ul class="list-group" id="difficultListGroup">
-            <li class="list-group-item">
-              <div class="form-check">
-                <input class="form-check-input" onclick="addQuestionFilter(this)" type="radio" 
-                  name="flexRadioDefault" value="All">
-                <button class="badge text-bg-info" for="flexRadioDefault1" disabled>
-                  All
-                </button>
-              </div>
-            </li>
-            {% for type in typeList %}
+        <div class="btn-group">
+          <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Question Type
+          </button>
+          <div id="type-list-group" class="dropdown-menu">
+            <ul class="list-group" id="difficultListGroup">
               <li class="list-group-item">
                 <div class="form-check">
                   <input class="form-check-input" onclick="addQuestionFilter(this)" type="radio" 
-                    name="flexRadioDefault" value="{{ type }}">
-                  <button class="badge text-bg-secondary" for="flexRadioDefault1" disabled>
-                    {{ type }}
+                    name="flexRadioDefault" value="All">
+                  <button class="badge text-bg-info" for="flexRadioDefault1" disabled>
+                    All
                   </button>
                 </div>
               </li>
-            {% endfor %}
-          </ul>
+              {% for type in typeList %}
+                <li class="list-group-item">
+                  <div class="form-check">
+                    <input class="form-check-input" onclick="addQuestionFilter(this)" type="radio" 
+                      name="flexRadioDefault" value="{{ type }}">
+                    <button class="badge text-bg-secondary" for="flexRadioDefault1" disabled>
+                      {{ type }}
+                    </button>
+                  </div>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -87,7 +90,7 @@
   
   <div class="row">
     <div class="col-sm-12">
-      <input type="text" class="form-control" placeholder="Search for Question" oninput="debounceInput()" id="textFilter">
+      <input type="text" class="form-control" placeholder="Search for Question" oninput="addTextFilter()" id="textFilter">
     </div>    
   </div>
 </div>

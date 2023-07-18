@@ -41,7 +41,10 @@ function getTextFilter(){
 
 function getUserDiscordId(){
   var userDiscordId = $("#userDiscordId").text();
-  return (userDiscordId === undefined) ? "": userDiscordId;
+  if(GLOBAL_FILTER_LIST.currentView != 'standardView'){
+    return (userDiscordId === undefined) ? "": userDiscordId;
+  }
+  return "";
 }
 
 function getCurrentView(){
@@ -253,10 +256,12 @@ function addQuestionFilter(ret){
   var textFilter = getTextFilter();
   var startDate = getStartDate();
   var endDate = getEndDate();
+  var userDiscordId = getUserDiscordId();
   getCurrentView();
 
   formatFilterView(questionFilter, difficultFilter, userFilter, textFilter, 
-    startDate, endDate, GLOBAL_FILTER_LIST.currentView, GLOBAL_FILTER_LIST.currentTable); 
+    startDate, endDate, GLOBAL_FILTER_LIST.currentView, GLOBAL_FILTER_LIST.currentTable,
+    userDiscordId); 
 }
 
 function addTextFilter(){
@@ -340,7 +345,6 @@ function formatCheckInView(ret) {
   var endDate = getEndDate();
   var textFilter = getTextFilter();
   var userDiscordId = getUserDiscordId();
-
   getCurrentView();
 
   // console.log("In the text filter:" + textFilter + ". DifficultFilter:"+difficultFilter +". userFilter:" 

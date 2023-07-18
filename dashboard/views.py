@@ -71,8 +71,11 @@ class homeView(ListView):
                     pass                          
         else:
             context['filters'] = self.request.GET.copy()
+        
         if 'typeList' not in context.keys():
-            context['typeList'] = LeetCode().get_types()       
+            context['typeList'] = LeetCode().get_types()     
+        # print("IN GET CONTEXT:")
+        # print(context['typeList'])  
         context['filters'].pop('page', None)
         paginator = context['paginator']
         paginator.filters = self.request.GET.copy()
@@ -187,7 +190,9 @@ class homeView(ListView):
         return filterQuery
 
     def get(self, request, *args, **kwargs):
+        # print("IN GET")
         response = super().get(request, *args, **kwargs)
+        # print(response)
         if 'currentView' in self.request.GET and self.request.GET['currentView'] == 'calendarView':
             # Create the context data for JSON serialization
             return JsonResponse(self.object_list, safe=False)
