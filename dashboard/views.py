@@ -16,8 +16,8 @@ class homeView(ListView):
     model = LeetCode
     paginate_by = 30
     template_name = 'dashboard/dashboard.html'  # <app>/<model>_<viewtype>.html
-    checkInDiscordServer = 482041455360344064
-    checkInDiscordChannel = 1067588155345215638
+    checkInDiscordServer = 1046106445617311824
+    checkInDiscordChannel = 1061332651690180608
     context_object_name = 'leetCode'
     LeetCode.objects.annotate(int_field=Cast('questionNo', IntegerField())).order_by('int_field')
     currentUser = "all_user_filter"
