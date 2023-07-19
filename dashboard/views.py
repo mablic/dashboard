@@ -85,8 +85,8 @@ class homeView(ListView):
         return context
 
     def get_queryset(self, *args ,**kwargs):
-        # print(f"THE GET QUERY: {self.request.GET}")
-        # print(f"IN GET QUERYSET KWARGS: {self.args} and Keys: {self.kwargs}")
+        print(f"THE GET QUERY: {self.request.GET}")
+        print(f"IN GET QUERYSET KWARGS: {self.args} and Keys: {self.kwargs}")
         filterQuery = LeetCode.objects.all()
 
         if 'userName' in self.request.GET:
@@ -207,7 +207,7 @@ class homeView(ListView):
         return url
 
     def post(self, request):
-        # print(f"In Post: {request}")
+        print({request.POST['postType']})
         questionNo = request.POST['quesiontNo']
         userId = request.POST['userId']      
         if request.POST['postType'] == 'addUser':
@@ -259,7 +259,7 @@ class homeView(ListView):
             # check in for users
             userDiscordId = request.POST['userDiscordId']
             checkInTime = request.POST['checkInTime']
-
+            # print("in the post add checkin:" + userDiscordId)
             try:
                 currObject = CheckIn.objects.filter(userId=userId, userDiscordId=userDiscordId, checkInTime=checkInTime, questionNo=questionNo)
                 context = {
@@ -272,6 +272,7 @@ class homeView(ListView):
                                          userDiscordId=userDiscordId, checkInTime=checkInTime, questionNo=questionNo,
                                          checkInDiscordServer=self.checkInDiscordServer, checkInDiscordChannel=self.checkInDiscordChannel,
                                          notificationFlag=0, tmrFlag=0)
+                    # print(currObject)
                     currObject.save()
                     context['checkIn'] = True
                 # return JsonResponse(context)
@@ -286,9 +287,9 @@ class homeView(ListView):
                 context = {
                     'checkIn': False,
                 }
-                # print(f"Remove checkIn/ userId:{userId}, userDiscordId:{userDiscordId}, checkInTime:{checkInTime}, questionNo:{questionNo}")
+                print(f"Remove checkIn/ userId:{userId}, userDiscordId:{userDiscordId}, checkInTime:{checkInTime}, questionNo:{questionNo}")
                 CheckIn.objects.filter(userId=userId, userDiscordId=userDiscordId, checkInTime=datetime.strptime(checkInTime, "%Y-%m-%d"), questionNo=questionNo).delete()
-                # print("remove checkIn post")
+                print("remove checkIn post")
                 context['checkIn'] = True
             except:
                 print(f"Error while remove checkIn for users {userId} checkIn on leetCode {questionNo}")
