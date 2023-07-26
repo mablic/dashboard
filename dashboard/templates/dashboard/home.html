@@ -1,9 +1,8 @@
-{% extends "dashboard/base.html" %}
+{% extends "base.html" %}
 {% block content %}
 {% load static %}
 <div class="objectives-section">
   <main>
-
     <!-- Hero Section -->
     <section class="bg-light text-dark overflow-hidden">
       <div class="container">
@@ -15,7 +14,6 @@
         </div>
       </div>
     </section>
-
     <!-- Call to Action Section -->
     <section class="bg-primary text-white py-5">
       <div class="container text-center">
@@ -26,61 +24,90 @@
     </section>
 
     <!-- Features Section -->
-  <section class="py-5 bg-light">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4 mb-4">
-          <div class="card h-100 bg-primary text-white">
-            <div class="card-body">
-              <h4 class="card-title text-uppercase mb-4">Comprehensive View</h4>
-              <p class="card-text">
-                Explore a comprehensive table of LeetCode problems with success rates, difficulty levels, question types, and user engagement. Check-in your progress and review problems at a glance.
-              </p>
+    <section class="py-5 bg-light">
+      <div class="container">
+        <div class="row">
+          <!-- Left Column -->
+          <div class="col-lg-6 mb-4">
+            <div class="card h-100 bg-light">
+              <div class="card-body">
+                <h4 class="card-title text-uppercase mb-4">Chart View</h4>
+              </div>
+              <div class="card-footer">
+                <img src="{% static 'tracker/image/Feature4.png' %}" class="card-img" alt="Phone Image 1">
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-lg-8 mb-4">
-          <div class="card h-100">
-            <img src="{% static 'dashboard/image/Feature1.png' %}" class="card-img" alt="Phone Image 1">
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-8 mb-4">
-          <div class="card h-100">
-            <img src="{% static 'dashboard/image/Feature2.png' %}" class="card-img" alt="Phone Image 2">
-          </div>
-        </div>
-        <div class="col-lg-4 mb-4">
-          <div class="card h-100">
-            <div class="card-body bg-primary text-white">
-              <h4 class="card-title text-uppercase mb-4">Track Progress</h4>
-              <p class="card-text">
-                Track your LeetCode progress with user check-ins. Expand or collapse the view by date for an easy overview of your check-in history and progress.
-              </p>
+          <!-- Right Column -->
+          <div class="col-lg-6 mb-4">
+            <div class="card h-100 bg-light">
+              <div class="card-body">
+                <h4 class="card-title text-uppercase mb-4">Table View</h4>
+              </div>
+              <div class="card-footer">
+                <img src="{% static 'tracker/image/Feature5.png' %}" class="card-img" alt="Phone Image 2">
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-lg-4 mb-4">
-          <div class="card h-100">
-            <div class="card-body bg-primary text-white">
-              <h4 class="card-title text-uppercase mb-4">Monitor Journey Effortlessly</h4>
-              <p class="card-text">
-                Visualize your LeetCode check-ins on a calendar view. Easily track and review your study progress, stay motivated, and gain insights into your learning journey with a comprehensive calendar visualization.
-              </p>
+    <!-- </section>
+
+    <section class="py-5 bg-light"> -->
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 mb-4">
+            <div class="card h-100 bg-primary text-white">
+              <div class="card-body">
+                <h4 class="card-title text-uppercase mb-4">Comprehensive View</h4>
+                <p class="card-text">
+                  Explore a comprehensive table of LeetCode problems with success rates, difficulty levels, question types, and user engagement. Check-in your progress and review problems at a glance.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8 mb-4">
+            <div class="card h-100">
+              <img src="{% static 'dashboard/image/Feature1.png' %}" class="card-img" alt="Phone Image 1">
             </div>
           </div>
         </div>
-        <div class="col-lg-8 mb-4">
-          <div class="card h-100">
-            <img src="{% static 'dashboard/image/Feature3.png' %}" class="card-img" alt="Phone Image 3">
+        <div class="row">
+          <div class="col-lg-8 mb-4">
+            <div class="card h-100">
+              <img src="{% static 'dashboard/image/Feature2.png' %}" class="card-img" alt="Phone Image 2">
+            </div>
+          </div>
+          <div class="col-lg-4 mb-4">
+            <div class="card h-100">
+              <div class="card-body bg-primary text-white">
+                <h4 class="card-title text-uppercase mb-4">Track Progress</h4>
+                <p class="card-text">
+                  Track your LeetCode progress with user check-ins. Expand or collapse the view by date for an easy overview of your check-in history and progress.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 mb-4">
+            <div class="card h-100">
+              <div class="card-body bg-primary text-white">
+                <h4 class="card-title text-uppercase mb-4">Monitor Journey Effortlessly</h4>
+                <p class="card-text">
+                  Visualize your LeetCode check-ins on a calendar view. Easily track and review your study progress, stay motivated, and gain insights into your learning journey with a comprehensive calendar visualization.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8 mb-4">
+            <div class="card h-100">
+              <img src="{% static 'dashboard/image/Feature3.png' %}" class="card-img" alt="Phone Image 3">
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
     <!-- Footer -->
     <footer class="bg-light py-3 text-center">

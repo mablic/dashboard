@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+  <div class="row mt-4 mb-4">
+    <div class="row mb-4">
+        <div class="col text-center">
+        <button type="button" class="btn btn-primary" id="prevBtn">Previous</button>
+        <button type="button" class="btn btn-primary" id="viewByWeekBtn">View by Week</button>
+        <button type="button" class="btn btn-primary" id="viewByMonthBtn">View by Month</button>
+        <button type="button" class="btn btn-primary" id="nextBtn">Next</button>
+        </div>
+        <div class="container">
+            <nav>
+                <div class="nav nav-tabs" id="dashboard-tab" role="tablist">
+                <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-graph" 
+                type="button" role="tab" aria-controls="nav-home" aria-selected="true">
+                    Graph View
+                </button>
+                <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-table" 
+                type="button" role="tab" aria-controls="nav-checkin" aria-selected="false">
+                    Table View
+                </button>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+            <!-- This is the standard table view -->
+            <div class="tab-pane fade show active" id="nav-graph" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+                {% include "tracker/trackerGraph.html" %}
+            </div>
+            <div class="tab-pane fade" id="nav-table" role="tabpanel" aria-labelledby="nav-checkin-tab" tabindex="0">
+                {% include "tracker/trackerTable.html" %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="display: none;" id="currentUserId">{{ user.id }}</div>
+<div style="display: none;" id="userDiscordId">{{ user.profile.discordId }}</div>
+{% endblock content %}

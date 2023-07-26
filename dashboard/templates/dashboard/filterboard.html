@@ -3,7 +3,7 @@
 <div class="container fixed-body" id="filterContainer">
   <div class="row">
     <div class="col-sm-4">
-      <div class="btn-group">
+      <div class="btn-group d-flex">
         {% if user.is_authenticated %}
           <button type="button" onclick="filterByUser(this)" value="all_user_filter" 
             urlValue="{% url 'dashboard' %}" class="btn btn-outline-secondary">ALL</button>

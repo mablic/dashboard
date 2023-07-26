@@ -66,7 +66,7 @@ class homeView(ListView):
                     context['filters']['endDate'].index(datetime.strptime(self.request.GET['endDate'], "%m/%d/%Y"))
                 except Exception as e:
                     context['filters']['startDate'] = datetime.strptime(self.request.GET['startDate'], "%m/%d/%Y")
-                    context['filters']['endDate'] = datetime.strptime(self.request.GET['endDate'], "%m/%d/%Y")
+                    context['filters']['endDate'] = datetime.strptime(self.request.GET['endDate'], )
                 finally:
                     pass                          
         else:

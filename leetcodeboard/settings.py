@@ -5,6 +5,7 @@ import mimetypes
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PARENT_DIR = os.path.dirname(BASE_DIR)
 mimetypes.add_type("text/javascript", ".js", True)
 
 # Quick-start development settings - unsuitable for production
@@ -26,6 +27,7 @@ DISCORD_REDIRECT_URI = 'https://' + ALLOWED_HOSTS[0] + '/callback'
 INSTALLED_APPS = [
     'dashboard.apps.DashboardConfig',
     'users.apps.UsersConfig',
+    'tracker.apps.TrackerConfig',
     'crispy_forms',
     "crispy_bootstrap5",
     'django.contrib.admin',
@@ -119,7 +121,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'dashboard/static'),
+    os.path.join(BASE_DIR, 'users/static'),
+    os.path.join(BASE_DIR, 'tracker/static'),
+    os.path.join(BASE_DIR, 'node_modules'),
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
@@ -146,3 +152,9 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_ACCOUNT')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
 
 # django_heroku.settings(locals())
+
+
+if __name__ == '__main__':
+    # Print all static folder paths
+    for path in STATICFILES_DIRS:
+        print("Static folder path:", path)

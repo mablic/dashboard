@@ -1,14 +1,15 @@
-{% extends "dashboard/base.html" %}
+{% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
   <div class="content-section">
+    {% if user.id != 32 %}
     <div class="media">
       <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
       <div class="media-body">
-        <h2 class="account-heading">{{ user.username }}</h2>
-        <p class="text-s">Discord Name: <mark>{{ user.profile.discordName }}</mark></p>
-        <p class="text-s">Discord Id: <mark>{{ user.profile.discordId }}</mark></p>
-        <p class="text-secondary">{{ user.email }}</p>
+          <h2 class="account-heading">{{ user.username }}</h2>
+          <p class="text-s">Discord Name: <mark>{{ user.profile.discordName }}</mark></p>
+          <p class="text-s">Discord Id: <mark>{{ user.profile.discordId }}</mark></p>
+          <p class="text-secondary">{{ user.email }}</p>
       </div>
     </div>
     <form method="POST" enctype="multipart/form-data">
@@ -23,5 +24,12 @@
             <a href="{% url 'authorize' %}" class="btn btn-outline-info">Link Discord Account</a>
         </div>
     </form>
+    {% else %}
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+        <div class="media-body">
+            <h2 class="account-heading">{{ user.username }}</h2>
+        </div>
+    {% endif %}
   </div>
 {% endblock content %}

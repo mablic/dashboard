@@ -1,0 +1,63 @@
+{% block checkTable %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8">
+    </div>
+    <div class="col-sm-4 d-flex justify-content-end">
+      <button id="addRecordBtn" class="btn btn-outline-secondary">Add Record</button>
+      <button id="exportBtn" class="btn btn-outline-secondary">Export to Excel</button>
+    </div>
+  </div>
+
+  <div class="tableContainer">
+    <table id="studyTable" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <!-- <th style="display: none;">ObjectId</th> -->
+                <!-- <th>ObjectID</th> -->
+                <th>Study Date</th>
+                <th>Study Topic</th>
+                <th>Study Time(mins)</th>
+            </tr>
+        </thead>
+    </table>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Edit</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Form to edit study details -->
+          <form id="editForm">
+            <!-- <div style="display: none;" id="objectId"></div> -->
+            <div class="form-group">
+              <label for="studyDate">Study Date</label>
+              <input type="date" class="form-control" oldValue="" id="inputStudyDate" name="studyDate">
+            </div>
+            <div class="form-group">
+              <label for="studyTopic">Study Topic</label>
+              <input type="text" class="form-control" oldValue="" id="inputStudyTopic" name="studyTopic">
+            </div>
+            <div class="form-group">
+              <label for="studyTime">Study Time (mins)</label>
+              <input type="number" class="form-control" oldValue="" id="inputStudyTime" name="studyTime" min="0" max="720">
+              <small class="invalid-input-note" style="color: red;">Please enter a value between 0 and 720.</small>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-outline-success" id="saveChangesBtn">Save changes</button>
+          <button type="button" class="btn btn-outline-danger" id="deleteBtn">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

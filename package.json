@@ -1,0 +1,25 @@
+{
+  "name": "leetcodeboard",
+  "version": "1.0.0",
+  "description": "https://sdashboard.herokuapp.com/",
+  "main": "index.js",
+  "dependencies": {
+    "bootstrap-icons": "^1.10.5",
+    "datatables.net-editor": "^2.2.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mablic/dashboard.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mablic/dashboard/issues"
+  },
+  "homepage": "https://github.com/mablic/dashboard#readme"
+}

@@ -1,0 +1,15 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+h1 {
+  margin-top: 20px;
+}
+
+.chart-container {
+  margin: 20px;
+  width: 400px;
+  display: inline-block;
+}
+  
