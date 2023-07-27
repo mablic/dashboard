@@ -173,10 +173,12 @@ function addUser(ret) {
     }).done(function(result) {
       toastCard.text(result['response']);
       $('.toast').toast('show');
-      var currentNode = $('#questionNoCount_' + questionNo);
-      var newValue = parseInt(currentNode.text())+1;
-      // console.log(newValue);
-      currentNode[0].innerText = String(newValue);
+      if(result['response'] == 'Success added!'){
+        var currentNode = $('#questionNoCount_' + questionNo);
+        var newValue = parseInt(currentNode.text())+1;
+        // console.log(newValue);
+        currentNode[0].innerText = String(newValue);
+      }
     });
   }
 }
