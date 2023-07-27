@@ -16,7 +16,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-ALLOWED_HOSTS = ['sdashboard.herokuapp.com']
+ALLOWED_HOSTS = ['studygrouppal.com', 'sdashboard.herokuapp.com']
 # ALLOWED_HOSTS = ['127.0.0.1']
 DISCORD_CLIENT_ID = os.environ.get('DISCORD_CLIENT_ID')
 DISCORD_CLIENT_SECRET = os.environ.get('DISCORD_CLIENT_SECRET')

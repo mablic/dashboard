@@ -175,6 +175,7 @@ function configureDateChart(ret){
   var avgData = ret['avgData'];
   var chartDateDict = {};
   var chartDateAvgDict = {};
+  var chartDateAvgCnt = {};
   var chartTypeDict = {};
 
   // console.log(ret);
@@ -202,10 +203,16 @@ function configureDateChart(ret){
     var studyDate = avgData[i]['studyDate'];
     var studyTime = avgData[i]['studyTime'];
     var studyTopic = avgData[i]['studyTopic'];
+    var count = 0;
     if (!chartDateAvgDict.hasOwnProperty(studyDate)) {
       chartDateAvgDict[studyDate] = studyTime;
     } else {
       chartDateAvgDict[studyDate] = +studyTime;
+    }
+    if (!chartDateAvgCnt.hasOwnProperty(studyDate)) {
+      chartDateAvgCnt[studyDate] = 1;
+    }else{
+      chartDateAvgCnt[studyDate] = +1;
     }
   }
 
@@ -220,8 +227,14 @@ function configureDateChart(ret){
   // avg type
   for (var key in chartDateAvgDict) {
     GLOBAL_TRACKER_LIST.dateChartAvgLabel.push(key);
-    GLOBAL_TRACKER_LIST.dateChartAvgData.push(chartDateAvgDict[key]);
+    if (chartDateAvgCnt.hasOwnProperty(key) && chartDateAvgCnt[key] != 0){
+      GLOBAL_TRACKER_LIST.dateChartAvgData.push(chartDateAvgDict[key]/chartDateAvgCnt[key]);
+    }else{
+      GLOBAL_TRACKER_LIST.dateChartAvgData.push(chartDateAvgDict[key]);
+    }
   }
+  
+  // console.log(chartDateAvgDict);
   // type
   for (var key in chartTypeDict) {
     GLOBAL_TRACKER_LIST.groupChartLabel.push(key);

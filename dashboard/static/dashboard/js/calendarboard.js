@@ -3,7 +3,7 @@ let currentYear;
 // Initial generation of the calendar
 const currentDate = new Date();
 
-function formatDate(year, month, day){
+function formatCalendarDate(year, month, day){
   const formattedDate = `${month}/${day}/${year}`;
   return formattedDate;
 }
@@ -19,25 +19,25 @@ function generateCalendar(year, month) {
   currentMonthElement.textContent = `${getMonthName(month)} ${year}`;
 
   // Get the first day of the month
-  var startDate = new Date(year, month, 1);
-  var endDate = new Date(year, month + 1, 0);
-  const firstDay = startDate.getDay();
+  var dashboardStartDate = new Date(year, month, 1);
+  var dashboardEndDate = new Date(year, month + 1, 0);
+  const firstDay = dashboardStartDate.getDay();
   // Get the number of days in the month
-  const totalDays = endDate.getDate();
+  const totalDays = dashboardEndDate.getDate();
   var userDiscordId = $("#userDiscordId").text();
 
-  startDate = formatDate(startDate.getFullYear(), String(startDate.getMonth()+1).padStart(2, '0'), String(startDate.getDate()).padStart(2, '0'))
-  endDate = formatDate(endDate.getFullYear(), String(endDate.getMonth()+1).padStart(2, '0'), String(endDate.getDate()).padStart(2, '0'))
+  dashboardStartDate = formatCalendarDate(dashboardStartDate.getFullYear(), String(dashboardStartDate.getMonth()+1).padStart(2, '0'), String(dashboardStartDate.getDate()).padStart(2, '0'))
+  dashboardEndDate = formatCalendarDate(dashboardEndDate.getFullYear(), String(dashboardEndDate.getMonth()+1).padStart(2, '0'), String(dashboardEndDate.getDate()).padStart(2, '0'))
 
-  // console.log(startDate)
+  console.log(dashboardStartDate)
   // Get check-in data from the database
   $.ajax({
     type: 'GET',
     dataType: 'json',
     url: '/dashboard/',
     data: {
-      'startDate': startDate,
-      'endDate': endDate,
+      'startDate': dashboardStartDate,
+      'endDate': dashboardEndDate,
       'userDiscordId': userDiscordId,
       'currentView': 'calendarView',
     },

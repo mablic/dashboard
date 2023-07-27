@@ -124,7 +124,6 @@ class trackerView(ListView):
                             studyTopic=studyTopic,
                             studyTime=studyTime
                         )
-
                         # Save the new record to the database
                         newRecord.save()
                         return JsonResponse({'message': 'Update successful'}, status=200)

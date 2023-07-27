@@ -6,6 +6,10 @@ from django.conf import settings
 from .models import Profile
 import requests
 
+def generateRedirectUri(request):
+    currenHost = request.get_host()
+    return f'https://{currenHost}/callback'
+
 def register(request):
     # print('test1')
     if request.method == 'POST':
@@ -49,7 +53,8 @@ def authorize(request):
     discord_auth_url = 'https://discord.com/api/oauth2/authorize'
     params = {
         'client_id': settings.DISCORD_CLIENT_ID,
-        'redirect_uri': settings.DISCORD_REDIRECT_URI,
+        'redirect_uri': generateRedirectUri(request),
+        # 'redirect_uri': settings.DISCORD_REDIRECT_URI,
         'response_type': 'code',
         'scope': 'identify',  # Add more scopes as needed
     }
@@ -64,7 +69,8 @@ def callback(request):
         'client_secret': settings.DISCORD_CLIENT_SECRET,
         'grant_type': 'authorization_code',
         'code': request.GET.get('code'),
-        'redirect_uri': settings.DISCORD_REDIRECT_URI,
+        'redirect_uri': generateRedirectUri(request),
+        # 'redirect_uri': settings.DISCORD_REDIRECT_URI,
         'scope': 'identify',  # Add more scopes as needed
     }
 

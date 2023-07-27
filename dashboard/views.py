@@ -164,10 +164,6 @@ class homeView(ListView):
                             #     print(f"{itm.questionNo}")
                             tableData.append({"dateTime": datetime.strftime(d, "%A, %d %B %Y"), 
                                             "items": filterQuery.filter(leetCodeQuery)})
-
-                    # for item in tableData:
-                    #     for detail in item['items']:
-                    #         print(f"Current DateTime is: {item['dateTime']}, QuestionNo is: {detail.questionName}")
                     return tableData
                 
                 if self.request.GET['currentView'] == 'calendarView':
