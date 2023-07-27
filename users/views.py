@@ -8,6 +8,7 @@ import requests
 
 def generateRedirectUri(request):
     currenHost = request.get_host()
+    print(currenHost)
     return f'https://{currenHost}/callback'
 
 def register(request):
