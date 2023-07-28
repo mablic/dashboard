@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>Welcome: {{ userName }}</h1>
-    <a href="{% url 'profile' %}">Profile</a>
+<div class="container">
+  <h1>Welcome: {{ userName }}</h1>
+  <a href="{% url 'profile' %}">Profile</a>
+</div>
+
 {% endblock content %}

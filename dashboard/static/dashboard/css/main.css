@@ -1,0 +1,198 @@
+.fixed-body {
+  margin-bottom: 20px;
+}
+
+.custom-container {
+  margin-bottom: 30px;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.fixed-bottom {
+  position: fixed;
+  margin: auto;
+  height: 100px;
+  width: 100%;
+  bottom: 0px;
+  background-color: white;
+}
+table tr td{
+  vertical-align: top;
+}
+table th {
+  text-align: center;
+  vertical-align: bottom;
+} 
+  
+ul {
+  margin: 0;
+}
+
+.account-img {
+  height: 125px;
+  width: 125px;
+  margin-right: 20px;
+  margin-bottom: 16px;
+}
+
+.account-heading {
+  font-size: 2.5rem;
+}
+
+.custom-select {
+  width: auto;
+}
+
+.input-group>.input-group-prepend {
+  flex: 0 0 30%;
+}
+.input-group .input-group-text {
+  width: 100%;
+}
+
+.table-condensed{
+  font-size: 100%;
+}
+
+#nav-tab {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#difficult-list-group .list-group {
+  width: 150px;
+  height: 150px;
+  overflow-y: scroll;
+}
+
+#discordButton {
+  border: 1px solid black;
+  background: blue;
+  color: white;
+  font-size: large;
+}
+
+#discordMsg {
+  color: black;
+  background-color: white;
+}
+
+#difficult-list-group .dropdown-menu {
+  width: 150px;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+#type-list-group .list-group {
+  width: 250px;
+  height: 250px;
+  overflow-y: scroll;
+}
+
+#type-list-group .dropdown-menu {
+  width: 250px;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+#currentUser {
+  display: none;
+}
+
+#userFilter {
+  display: none;
+}
+
+#questionFilter {
+  display: none;
+}
+
+#difficultyFilter {
+  display: none;
+}
+
+#filterContainer {
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-left: 0%;
+  padding-right: 0%;
+}
+
+/* home page */
+.text-3d {
+  text-shadow: 1px 1px 2px #000, 0 0 1em #000, 0 0 0.2em #000;
+}
+
+/* calendar table */
+
+.calendar-container {
+  width: 100%;
+  /* Adjust the maximum width as per your preference */
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-sizing: border-box;
+  /* display: flex; */
+  /* flex-wrap: wrap; */
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.calendar-nav {
+  display: flex;
+  align-items: center;
+}
+.calendar-nav button {
+  border: none;
+  background: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+.calendar-nav button:focus {
+  outline: none;
+}
+.calendar-body {
+  display: flex;
+  flex-wrap: wrap;
+}
+.calendar-day {
+  border: 1px solid #ccc;
+  text-align: left;
+  font-size: 18px;
+  width: 25%;
+  height: auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.calendar-day-number {
+  font-weight: bold;
+  font-size: 14px;
+}
+.calendar-notes {
+  font-size: 12px;
+  margin-top: 5px;
+}
+.calendar-month {
+  text-align: center;
+}
+
+.calendar-day .calendar-notes {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.calendar-day .calendar-notes:hover {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+}

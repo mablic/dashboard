@@ -1,121 +1,109 @@
 {% extends "base.html" %}
 {% block content %}
 {% load static %}
+
 <div class="objectives-section">
-  <main>
-    <!-- Hero Section -->
-    <section class="bg-light text-dark overflow-hidden">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 mx-auto text-center">
-            <h1 class="display-4 text-uppercase mb-4" style="font-family: 'STCaiyun', cursive; font-style: italic">Study & Connect</h1>
-            <p class="lead font-italic">Unite. Learn. Succeed.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Call to Action Section -->
-    <section class="bg-primary text-white py-5">
-      <div class="container text-center">
-        <h2 class="display-4 text-uppercase mb-4" style="font-style: italic">Join our Community</h2>
-        <p class="lead">Connect with like-minded individuals, participate in discussions, and enhance your learning journey by joining our Discord community.</p>
-        <a href='https://discord.gg/mBCxFK4tNu' target="_blank" class="btn btn-light btn-lg">Join Discord</a>
-      </div>
-    </section>
 
-    <!-- Features Section -->
-    <section class="py-5 bg-light">
-      <div class="container">
-        <div class="row">
-          <!-- Left Column -->
-          <div class="col-lg-6 mb-4">
-            <div class="card h-100 bg-light">
-              <div class="card-body">
-                <h4 class="card-title text-uppercase mb-4">Chart View</h4>
-              </div>
-              <div class="card-footer">
-                <img src="{% static 'tracker/image/Feature4.png' %}" class="card-img" alt="Phone Image 1">
-              </div>
-            </div>
-          </div>
-          <!-- Right Column -->
-          <div class="col-lg-6 mb-4">
-            <div class="card h-100 bg-light">
-              <div class="card-body">
-                <h4 class="card-title text-uppercase mb-4">Table View</h4>
-              </div>
-              <div class="card-footer">
-                <img src="{% static 'tracker/image/Feature5.png' %}" class="card-img" alt="Phone Image 2">
-              </div>
-            </div>
-          </div>
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class=""></li>
+      <li data-target="#myCarousel" data-slide-to="1" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="2" class=""></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item">
+        <div class="carousel-caption text-left">
+          <h1 class="header-topic">Join Community</h1>
+          <p>Connect with like-minded individuals and enhance your learning journey by joining our Discord community.</p>
+          <a href='https://discord.gg/mBCxFK4tNu' target="_blank" class="btn btn-primary btn-lg">Join Discord</a>
         </div>
       </div>
-    <!-- </section>
+      <div class="carousel-item active">
+        <div class="carousel-caption">
+          <h1 class="header-topic">Visualize Progress</h1>
+          <p>Track and visualize study progress for increased productivity and academic success.</p>
+          <a href="#example" class="btn btn-primary btn-lg">See Example</a>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="carousel-caption text-right">
+          <h1 class="header-topic">LeetCode Tracking</h1>
+          <p>Effortlessly monitor your coding challenges, analyze performance, and optimize your coding skills.</p>
+          <a href='#checkin' class="btn btn-primary btn-lg">Check In</a>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
 
-    <section class="py-5 bg-light"> -->
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4 mb-4">
-            <div class="card h-100 bg-primary text-white">
-              <div class="card-body">
-                <h4 class="card-title text-uppercase mb-4">Comprehensive View</h4>
-                <p class="card-text">
-                  Explore a comprehensive table of LeetCode problems with success rates, difficulty levels, question types, and user engagement. Check-in your progress and review problems at a glance.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-8 mb-4">
-            <div class="card h-100">
-              <img src="{% static 'dashboard/image/Feature1.png' %}" class="card-img" alt="Phone Image 1">
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-8 mb-4">
-            <div class="card h-100">
-              <img src="{% static 'dashboard/image/Feature2.png' %}" class="card-img" alt="Phone Image 2">
-            </div>
-          </div>
-          <div class="col-lg-4 mb-4">
-            <div class="card h-100">
-              <div class="card-body bg-primary text-white">
-                <h4 class="card-title text-uppercase mb-4">Track Progress</h4>
-                <p class="card-text">
-                  Track your LeetCode progress with user check-ins. Expand or collapse the view by date for an easy overview of your check-in history and progress.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-4 mb-4">
-            <div class="card h-100">
-              <div class="card-body bg-primary text-white">
-                <h4 class="card-title text-uppercase mb-4">Monitor Journey Effortlessly</h4>
-                <p class="card-text">
-                  Visualize your LeetCode check-ins on a calendar view. Easily track and review your study progress, stay motivated, and gain insights into your learning journey with a comprehensive calendar visualization.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-8 mb-4">
-            <div class="card h-100">
-              <img src="{% static 'dashboard/image/Feature3.png' %}" class="card-img" alt="Phone Image 3">
-            </div>
-          </div>
-        </div>
+  <div class="container marketing">
+    <div class="row">
+      <div class="col-lg-4">
+        <img class="rounded-circle" src="{% static 'dashboard/image/collaboration.jpg' %}" alt="Generic placeholder image" width="140" height="140">
+        <h3 style="margin-top: 30px;">𝕮𝖔𝖑𝖑𝖆𝖇𝖔𝖗𝖆𝖙𝖎𝖔𝖓</h3>
       </div>
-    </section>
+      <div class="col-lg-4">
+        <img class="rounded-circle" src="{% static 'dashboard/image/idea.jpg' %}" alt="Generic placeholder image" width="140" height="140">
+        <h3 style="margin-top: 30px;">𝕴𝖉𝖊𝖆</h2>
+     </div>
+      <div class="col-lg-4">
+        <img class="rounded-circle" src="{% static 'dashboard/image/improvement.jpg' %}" alt="Generic placeholder image" width="140" height="140">
+        <h3 style="margin-top: 30px;">𝕴𝖒𝖕𝖗𝖔𝖛𝖊𝖒𝖊𝖓𝖙</h3>
+    </div>
+    </div>
 
-    <!-- Footer -->
-    <footer class="bg-light py-3 text-center">
-      <div class="container">
-        <p>&copy; 2022 Dashboard All rights reserved.</p>
-      </div>
-    </footer>
-  </main>
+    <!-- START THE FEATURETTES -->
+
+  <div id="example"></div>
+  <hr class="featurette-divider">
+  <div class="row featurette">
+    <div class="col-md-12">
+      <h2 class="featurette-heading">Study Tracker. <span class="text-muted">It'll blow your mind.</span></h2>
+      <p class="lead">
+        Study Tracker: Elevate your learning experience, track your achievements, and stay focused on academic success.</p>
+    </div>
+  </div>
+  <div class="row featurette" style="margin-top: 50px;">
+    <div class="col-md-12">
+      <img class="featurette-image img-fluid mx-auto" src="{% static 'dashboard/image/feature1.png' %}" data-holder-rendered="true">
+    </div>
+  </div>
+
+  <hr class="featurette-divider">
+
+  <div class="row featurette">
+    <div class="col-md-7 order-md-2">
+      <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
+      <p class="lead">Customize study data and download to Excel for insightful analysis. Stay in control of your progress with our study tracker.</p>
+    </div>
+    <div class="col-md-5 order-md-1">
+      <img class="featurette-image img-fluid mx-auto" src="{% static 'dashboard/image/feature2.png' %}" data-holder-rendered="true">
+    </div>
+  </div>
+
+  <div id="checkin"></div>
+  <hr class="featurette-divider">
+
+  <div class="row featurette">
+    <div class="col-md-7">
+      <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
+      <p class="lead">what to keep track on your leetcode or get help from others? check out our leetcode view board.</p>
+    </div>
+    <div class="col-md-5">
+      <img class="featurette-image img-fluid mx-auto" src="{% static 'dashboard/image/feature3.png' %}" data-holder-rendered="true">
+    </div>
+  </div>
+
+  <hr class="featurette-divider">
+  </div>
+    
 </div>
 
 

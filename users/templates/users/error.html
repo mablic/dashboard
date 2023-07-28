@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>Error</h1>
-    <p>There was an error linking your Discord account.</p>
-    <a href="{% url 'profile' %}">Profile</a>
+<div class="container">
+  <h1>Error</h1>
+  <p>There was an error linking your Discord account.</p>
+  <a href="{% url 'profile' %}">Profile</a>
+</div>
+
 {% endblock content %}
