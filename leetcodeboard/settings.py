@@ -9,9 +9,9 @@ PARENT_DIR = os.path.dirname(BASE_DIR)
 mimetypes.add_type("text/javascript", ".js", True)
 
 # Enable HTTPS
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+# SECURE_SSL_REDIRECT = True
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -20,13 +20,13 @@ CSRF_COOKIE_SECURE = True
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-ALLOWED_HOSTS = ['studygrouppal.com', 'sdashboard.herokuapp.com']
-# ALLOWED_HOSTS = ['127.0.0.1']
+DEBUG = True
+# ALLOWED_HOSTS = ['studygrouppal.com', 'sdashboard.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1']
 DISCORD_CLIENT_ID = os.environ.get('DISCORD_CLIENT_ID')
 DISCORD_CLIENT_SECRET = os.environ.get('DISCORD_CLIENT_SECRET')
-DISCORD_REDIRECT_URI = 'https://' + ALLOWED_HOSTS[0] + '/callback'
-# DISCORD_REDIRECT_URI = 'http://' + ALLOWED_HOSTS[0] + ':8000/callback'
+# DISCORD_REDIRECT_URI = 'https://' + ALLOWED_HOSTS[0] + '/callback'
+DISCORD_REDIRECT_URI = 'http://' + ALLOWED_HOSTS[0] + ':8000/callback'
 # Application definition
 
 INSTALLED_APPS = [
@@ -146,7 +146,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = 'dashboard'
+LOGIN_REDIRECT_URL = 'tracker'
 LOGIN_URL = 'login'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

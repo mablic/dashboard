@@ -8,7 +8,7 @@ import requests
 
 def generateRedirectUri(request):
     currenHost = request.get_host()
-    print(currenHost)
+    # print(currenHost)
     return f'https://{currenHost}/callback'
 
 def register(request):
@@ -37,7 +37,7 @@ def profile(request):
             p_form.save()
             messages.success(request, f'Your account has been updated!')
             return redirect('profile')
-
+            
     else:
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
