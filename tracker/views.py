@@ -4,7 +4,7 @@ from django.views.generic import ListView
 from django.db.models.expressions import RawSQL
 from .models import StudyTracker
 from django.http import HttpResponse, JsonResponse
-from .models import StudyTracker
+from .models import StudyTracker, GoalTracker
 from django.db.models import Q, Avg, F
 from datetime import datetime, timedelta
 from json import dumps
@@ -38,7 +38,7 @@ class trackerView(ListView):
 
     def post(self, request):
         filterQuery = StudyTracker.objects.all()
-        if 'postType' in request.POST:
+        if 'postType' in request.POST and self.request.user.is_authenticated:
             if 'discordUserId' in self.request.POST and self.request.POST['discordUserId'] != 'None':
                 discordUserId = self.request.POST['discordUserId']
             else:
@@ -62,11 +62,11 @@ class trackerView(ListView):
                     Q(userId=currentUserId) | Q(discordUserId=discordUserId),
                     studyDate__gte=startDate,
                     studyDate__lte=endDate
-                )
+                ).order_by('studyDate')
                 allQuery = filterQuery.filter(
                     studyDate__gte=startDate,
                     studyDate__lte=endDate
-                )
+                ).values('studyDate').annotate(avg_studyTime=Avg('studyTime')).order_by('studyDate')
                 data = {
                     'userData': list(userQuery.values()),
                     'avgData': list(allQuery.values())
@@ -133,7 +133,8 @@ class trackerView(ListView):
                 else:
                     print("IN OTHERS")
                     pass
-
+        else:
+            data = []
         # for entry in data:
         #     del entry['_id']
         # data = list(filterQuery.values())

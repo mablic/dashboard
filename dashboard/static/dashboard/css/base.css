@@ -93,12 +93,35 @@ body {
   width: 100%;
   height: 2rem;
   background-color: rgb(191, 190, 190);
-  border: solid rgba(0, 0, 0, .15);
+  border: solid rgba(255, 255, 255, 0.15);
   border-width: 1px 0;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+
+.b-divider-section {
+  width: 100%;
+  height: 2rem;
+  background-color: inherit;
+  border: none;
+  border-width: 1px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.b-divider-footer {
+  width: 100%;
+  height: 3rem;
+  background-color: inherit;
+  border: none;
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  text-align: left;
 }
 
 .fit-text {

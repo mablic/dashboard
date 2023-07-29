@@ -1,33 +1,34 @@
-{% block checkTable %}
-{% load static %}
+{% block goalTable %}
 
 <div class="container">
   <div class="row">
     <div class="col-sm-8">
     </div>
     <div class="col-sm-4 d-flex justify-content-end">
-      <button id="addRecordBtn" class="btn btn-outline-primary rounded-5">Add Record</button>
-      <button id="exportBtn" class="btn btn-outline-primary rounded-5">Export to Excel</button>
+      <button id="addRecordBtn" class="btn btn-outline-secondary">Add Record</button>
+      <button id="exportBtn" class="btn btn-outline-secondary">Export to Excel</button>
     </div>
   </div>
   <div class="b-divider-section">
   </div>
   <div class="tableContainer">
-    <table id="studyTable" class="display" style="width:100%">
-        <thead>
-            <tr>
-                <!-- <th style="display: none;">ObjectId</th> -->
-                <!-- <th>ObjectID</th> -->
-                <th>Study Date</th>
-                <th>Study Topic</th>
-                <th>Study Time(mins)</th>
-            </tr>
-        </thead>
+    <table id="goalTable" class="display" style="width:100%">
+      <thead>
+        <tr>
+          <!-- <th style="display: none;">ObjectId</th> -->
+          <!-- <th>ObjectID</th> -->
+          <th>Goal Week</th>
+          <th>Goal Topic</th>
+          <th>Goal Target</th>
+          <th>Goal Complete</th>
+          <th>Rate</th>
+        </tr>
+      </thead>
     </table>
   </div>
 
   <!-- Modal -->
-  <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="editGoalModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -37,7 +38,6 @@
         <div class="modal-body">
           <!-- Form to edit study details -->
           <form id="editForm">
-            <!-- <div style="display: none;" id="objectId"></div> -->
             <div class="form-group">
               <label for="studyDate">Study Date</label>
               <input type="date" class="form-control" oldValue="" id="inputStudyDate" name="studyDate">
@@ -62,6 +62,4 @@
     </div>
   </div>
 </div>
-
-<script type="text/javascript" src="{% static 'tracker/js/trackerTable.js' %}"></script>
 {% endblock %}

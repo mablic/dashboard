@@ -91,6 +91,9 @@ class homeView(ListView):
 
         if 'userName' in self.request.GET:
             self.currentUser = self.request.GET['userName']
+        if 'numberFilter' in self.request.GET and self.request.GET['numberFilter'] != '0':
+            filterValue = self.request.GET['numberFilter']
+            filterQuery = filterQuery.filter(questionNo=filterValue)
         if 'difficult' in self.request.GET and self.request.GET['difficult'] != "All":
             dList = self.request.GET['difficult'].split(';')
             if dList != []:

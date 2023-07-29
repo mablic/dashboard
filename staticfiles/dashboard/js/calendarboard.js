@@ -29,7 +29,7 @@ function generateCalendar(year, month) {
   dashboardStartDate = formatCalendarDate(dashboardStartDate.getFullYear(), String(dashboardStartDate.getMonth()+1).padStart(2, '0'), String(dashboardStartDate.getDate()).padStart(2, '0'))
   dashboardEndDate = formatCalendarDate(dashboardEndDate.getFullYear(), String(dashboardEndDate.getMonth()+1).padStart(2, '0'), String(dashboardEndDate.getDate()).padStart(2, '0'))
 
-  console.log(dashboardStartDate)
+  // console.log(dashboardStartDate)
   // Get check-in data from the database
   $.ajax({
     type: 'GET',

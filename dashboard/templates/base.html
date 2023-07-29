@@ -37,7 +37,11 @@
 
 <body>
   <div class="b-divider">
-    <h2><a class="nav-link" href="{% url 'home' %}">ʂƚυԃყ ɠɾσυρ</a></h2>
+    {% if user.is_authenticated %}
+      <h2><a class="nav-link" href="{% url 'home' %}">нι {{user.username}}, ωєℓ¢σмє тσ тнє ʂƚυԃყ ɠɾσυρ</a></h2>
+    {% else %}
+      <h2><a class="nav-link" href="{% url 'home' %}">ʂƚυԃყ ɠɾσυρ</a></h2>
+    {% endif %} 
   </div>
   <nav class="navbar navbar-expand-md border-bottom">
     <div class="container">
@@ -53,6 +57,7 @@
                 <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">Profile</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
             {% else %}
+                <!-- <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Demo</a></li> -->
                 <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
             {% endif %}               
@@ -77,8 +82,31 @@
 
   {% block content %}
   {% endblock %}
+
+  <div class="b-divider">
+    <h2><a class="nav-link" href="{% url 'home' %}">ʂƚυԃყ ɠɾσυρ</a></h2>&nbsp;&nbsp;&nbsp;
+    <button class="badge text-bg-primary rounded-5">Discord</button>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-1" style="text-align: left;">
+        <button class="badge text-bg-secondary rounded-5" disabled>Email</button>
+      </div>
+      <div class="col-sm-5" style="text-align: left;">
+        mablic@hotmail.com
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-1" style="text-align: left;">
+        <button class="badge text-bg-secondary rounded-5" disabled>Phone</button>
+      </div>
+      <div class="col-sm-5" style="text-align: left;">
+        Oops, no calls
+      </div>
+    </div>
+  </div>
   <!-- Footer -->
-  <footer class="bg-light py-3 text-center">
+  <footer class="bg-light py-2 text-center">
     <div class="container">
       <p>&copy; 2022 Dashboard All rights reserved.</p>
     </div>
@@ -98,12 +126,8 @@
 
   <!-- Other JavaScript -->
   <script type="text/javascript" src="{% static 'dashboard/js/main.js' %}"></script>
-  <script type="text/javascript" src="{% static 'dashboard/js/dashboard.js' %}"></script>
-  <script type="text/javascript" src="{% static 'dashboard/js/checkindashboard.js' %}"></script>
-  <script type="text/javascript" src="{% static 'dashboard/js/filterboard.js' %}"></script>
-  <script type="text/javascript" src="{% static 'dashboard/js/calendarboard.js' %}"></script>
   <script type="text/javascript" src="{% static 'dashboard/js/tableToExcel/tableToExcel.js' %}"></script>
-  <script type="text/javascript" src="{% static 'tracker/js/trackerGraph.js' %}"></script>
-  <script type="text/javascript" src="{% static 'tracker/js/trackerTable.js' %}"></script>
+  
+ 
 </body> 
 </html>

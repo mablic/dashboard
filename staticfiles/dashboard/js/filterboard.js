@@ -264,8 +264,30 @@ function addQuestionFilter(ret){
     userDiscordId); 
 }
 
+function addNumberFilter(){
+  resetAllFilter();
+  setTimeout(function() {
+  }, 3000);
+  var numberFilter = document.getElementById("numberFilter").value;
+  if (numberFilter == ''){
+    numberFilter = '0';
+  }
+  var difficultFilter = getDifficultFilter();
+  var userFilter = getUserFilter();
+  var questionFilter = getQuestionFilter();
+  var startDate = getStartDate();
+  var endDate = getEndDate();
+  var textFilter = getTextFilter();
+  var userDiscordId = getUserDiscordId();
+  getCurrentView();
+
+  formatFilterView(questionFilter, difficultFilter, userFilter, 
+    textFilter, startDate, endDate, GLOBAL_FILTER_LIST.currentView, GLOBAL_FILTER_LIST.currentTable, userDiscordId, numberFilter); 
+};
+
 function addTextFilter(){
-  // set the text filter
+  setTimeout(function() {
+  }, 3000);
   var textFilter = document.getElementById("textFilter").value;
   GLOBAL_FILTER_LIST['textFilter'] = textFilter;
 
@@ -355,7 +377,7 @@ function formatCheckInView(ret) {
 }
 
 function formatFilterView(questionFilter, difficultFilter, 
-  userFilter, textFilter, startDate, endDate, currentView, currentTable, userDiscordId) {
+  userFilter, textFilter, startDate, endDate, currentView, currentTable, userDiscordId, numberFilter=0) {
 
   $.ajax({
     type: 'GET',
@@ -366,6 +388,7 @@ function formatFilterView(questionFilter, difficultFilter,
     'startDate': startDate, 'endDate': endDate,
     'userDiscordId': userDiscordId,
     'currentView': currentView,
+    'numberFilter': numberFilter,
   },
     headers: { "X-CSRFToken": csrftoken },
   }).done(function(data) {

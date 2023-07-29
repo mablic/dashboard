@@ -5,35 +5,45 @@
 <div class="container">
   <div class="row mt-4 mb-4">
     <div class="row mb-4">
-        <div class="col text-center">
-        <button type="button" class="btn btn-primary" id="prevBtn">Previous</button>
-        <button type="button" class="btn btn-primary" id="viewByWeekBtn">View by Week</button>
-        <button type="button" class="btn btn-primary" id="viewByMonthBtn">View by Month</button>
-        <button type="button" class="btn btn-primary" id="nextBtn">Next</button>
-        </div>
-        <div class="container">
-            <nav>
-                <div class="nav nav-tabs" id="dashboard-tab" role="tablist">
-                <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-graph" 
-                type="button" role="tab" aria-controls="nav-home" aria-selected="true">
-                    Graph View
-                </button>
-                <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-table" 
-                type="button" role="tab" aria-controls="nav-checkin" aria-selected="false">
-                    Table View
-                </button>
-                </div>
+      <div class="col text-center">
+        <button type="button" class="btn btn-primary rounded-5" id="prevBtn">Previous</button>
+        <button type="button" class="btn btn-primary rounded-5" id="viewByWeekBtn">View by Week</button>
+        <button type="button" class="btn btn-primary rounded-5" id="viewByMonthBtn">View by Month</button>
+        <button type="button" class="btn btn-primary rounded-5" id="nextBtn">Next</button>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <nav class="smaller-nav">
+              <ul class="nav nav-pills nav-fill gap-2 p-1 small bg-primary rounded-5 shadow-sm" id="pillNav2" role="tablist" style="--bs-nav-link-color: rgba(255, 255, 255, .75); --bs-nav-link-hover-color: #fff; --bs-nav-pills-link-active-color: var(--bs-primary); --bs-nav-pills-link-active-bg: var(--bs-white);">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link rounded-5 active" id="home-tab2" data-bs-target="#nav-graph" data-bs-toggle="tab" type="button" role="tab" aria-selected="false" tabindex="-1" onclick="loadStudy()">Study</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link rounded-5" id="profile-tab2" data-bs-target="#nav-table" data-bs-toggle="tab" type="button" role="tab" aria-selected="false" tabindex="-1">Table</button>
+                </li>
+                <!-- <li class="nav-item" role="presentation">
+                  <button class="nav-link rounded-5" id="contact-tab2" data-bs-target="#nav-goal" data-bs-toggle="tab" type="button" role="tab" aria-selected="true">Goal</button>
+                </li> -->
+              </ul>
             </nav>
-            <div class="tab-content" id="nav-tabContent">
-            <!-- This is the standard table view -->
-            <div class="tab-pane fade show active" id="nav-graph" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-                {% include "tracker/trackerGraph.html" %}
-            </div>
-            <div class="tab-pane fade" id="nav-table" role="tabpanel" aria-labelledby="nav-checkin-tab" tabindex="0">
-                {% include "tracker/trackerTable.html" %}
-            </div>
+          </div>
         </div>
+        <div class="tab-content" id="nav-tabContent">
+          <!-- This is the standard table view -->
+          <div class="tab-pane fade show active" id="nav-graph" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+            {% include "tracker/trackerGraph.html" %}
+          </div>
+          <div class="tab-pane fade" id="nav-table" role="tabpanel" aria-labelledby="nav-checkin-tab" tabindex="0">
+            {% include "tracker/trackerTable.html" %}
+          </div>
+          <!-- <div class="tab-pane fade" id="nav-goal" role="tabpanel" aria-labelledby="nav-checkin-tab" tabindex="0">
+            {% include "tracker/goalTable.html" %}
+          </div> -->
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <div style="display: none;" id="currentUserId">{{ user.id }}</div>

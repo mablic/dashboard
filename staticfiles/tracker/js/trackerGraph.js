@@ -123,7 +123,20 @@ function initialChartData(){
   var todayDate = GLOBAL_TRACKER_LIST.chartDateTime;
   var discordUserId = getDiscordUserId();
   const [startDate, endDate] = getDates(todayDate, GLOBAL_TRACKER_LIST.chartPeriod);
-  getData(formatDateToMMDDYYYY(startDate), formatDateToMMDDYYYY(endDate), discordUserId);
+  var currentUserId = $("#currentUserId").text();
+  // console.log(currentUserId);
+  if (currentUserId != 'None'){
+    getData(formatDateToMMDDYYYY(startDate), formatDateToMMDDYYYY(endDate), discordUserId);
+  }else{
+    var toastCard = $('#toastBody');
+    toastCard.text("Please login");
+    $('.toast').toast('show');
+    return;
+  }
+}
+
+function loadStudy(){
+  initialChartData();
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -209,28 +222,20 @@ function configureDateChart(ret){
     } else {
       chartDateAvgDict[studyDate] = +studyTime;
     }
-    if (!chartDateAvgCnt.hasOwnProperty(studyDate)) {
-      chartDateAvgCnt[studyDate] = 1;
-    }else{
-      chartDateAvgCnt[studyDate] = +1;
-    }
   }
-
-  // console.log(chartDateDict);
+  console.log(chartDateDict);
+  console.log(chartDateAvgDict);
   clearAllChartData();
-  // date type
-  for (var key in chartDateDict) {
-    GLOBAL_TRACKER_LIST.dateChartLabel.push(key);
-    GLOBAL_TRACKER_LIST.dateChartDate.push(chartDateDict[key]);
-  }
 
   // avg type
   for (var key in chartDateAvgDict) {
     GLOBAL_TRACKER_LIST.dateChartAvgLabel.push(key);
-    if (chartDateAvgCnt.hasOwnProperty(key) && chartDateAvgCnt[key] != 0){
-      GLOBAL_TRACKER_LIST.dateChartAvgData.push(chartDateAvgDict[key]/chartDateAvgCnt[key]);
+    GLOBAL_TRACKER_LIST.dateChartAvgData.push(chartDateAvgDict[key])
+    GLOBAL_TRACKER_LIST.dateChartLabel.push(key);
+    if(chartDateDict.hasOwnProperty(key)){
+      GLOBAL_TRACKER_LIST.dateChartDate.push(chartDateDict[key]);
     }else{
-      GLOBAL_TRACKER_LIST.dateChartAvgData.push(chartDateAvgDict[key]);
+      GLOBAL_TRACKER_LIST.dateChartDate.push(0);
     }
   }
   
@@ -266,7 +271,7 @@ function updateChart(chartType, chartName, labelName, dataName) {
     var myChart = new Chart(ctx, {
       type: chartType,
       data: {
-        labels: label, // Use labels for line1
+        labels: GLOBAL_TRACKER_LIST.dateChartAvgLabel, // Use labels for line1
         datasets: [
           {
             label: 'Myself',
@@ -302,7 +307,7 @@ function updateChart(chartType, chartName, labelName, dataName) {
           data: data,
           backgroundColor: dataPointColors,
           borderColor: 'rgba(75, 192, 192, 1)',
-          borderWidth: 3,
+          borderWidth: 2,
         }]
       },
       options: {

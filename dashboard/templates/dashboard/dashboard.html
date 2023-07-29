@@ -1,28 +1,41 @@
 {% extends "base.html" %}
 {% block content %}
+{% load static %}
 
 {% include "dashboard/filterboard.html" %}
 <div class="container">
   <body onload="formatTable()"></body>
-    <nav>
-      <div class="nav nav-tabs" id="dashboard-tab" role="tablist">
-        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" 
-        type="button" role="tab" aria-controls="nav-home" aria-selected="true" onclick="formatStandardView(this)">
-          Standard View
-        </button>
-        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-checkin" 
-        type="button" role="tab" aria-controls="nav-checkin" aria-selected="false" onclick="formatCheckInView(this)">
-          Check In View
-        </button>
-        <button class="nav-link" id="nav-calendar-tab" data-bs-toggle="tab" data-bs-target="#nav-calendar" 
-          type="button" role="tab" aria-controls="nav-calendar" aria-selected="false" onclick="calendarView(this)">
-          Calendar View
-        </button>
+    <div class="row">
+      <div class="col-md-4">
+        <nav class="smaller-nav">
+          <ul class="nav nav-pills nav-fill gap-2 p-1 small bg-primary rounded-5 shadow-sm" id="pillNav2" role="tablist" style="--bs-nav-link-color: rgba(255, 255, 255, .75); --bs-nav-link-hover-color: #fff; --bs-nav-pills-link-active-color: var(--bs-primary); --bs-nav-pills-link-active-bg: var(--bs-white);">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link rounded-5 active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-all" 
+                type="button" role="tab" aria-controls="nav-home" aria-selected="true" onclick="formatStandardView(this)">
+                All
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link rounded-5" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-checkin" 
+                type="button" role="tab" aria-controls="nav-checkin" aria-selected="false" onclick="formatCheckInView(this)">
+                  CheckIn
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link rounded-5" id="nav-calendar-tab" data-bs-toggle="tab" data-bs-target="#nav-calendar" 
+                type="button" role="tab" aria-controls="nav-calendar" aria-selected="false" onclick="calendarView(this)">
+                Calendar
+            </button>
+            </li>
+          </ul>
+        </nav>
       </div>
-    </nav>
+    </div>
+    <div class="b-divider-section">
+    </div>
     <div class="tab-content" id="nav-tabContent">
       <!-- This is the standard table view -->
-      <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+      <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab" tabindex="0">
         {% include "dashboard/standardTable.html" %}
       </div>
       <div class="tab-pane fade" id="nav-checkin" role="tabpanel" aria-labelledby="nav-checkin-tab" tabindex="0">
@@ -39,6 +52,10 @@
     {% include "dashboard/reviewboard.html" %}
     {% include "dashboard/checkinboard.html" %}
 
+    <script type="text/javascript" src="{% static 'dashboard/js/dashboard.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dashboard/js/checkindashboard.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dashboard/js/filterboard.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dashboard/js/calendarboard.js' %}"></script>
   </body>
 </div>
 {% endblock content %}
