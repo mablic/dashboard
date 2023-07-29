@@ -3,7 +3,7 @@
 <div class="container">
   <div class="container fixed-body" id="filterContainer">
     <div class="row">
-      <div class="col-sm-4">
+      <div class="col-md-4">
         <div class="btn-group d-flex">
           {% if user.is_authenticated %}
             <button type="button" onclick="filterByUser(this)" value="all_user_filter" 
@@ -75,14 +75,14 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-6">
+      <div class="col-md-6">
         <div class="btn-group">
           <button class="badge text-bg-secondary rounded-5" for="flexRadioDefault1" disabled>Check In Filter</button>
           <input type="text" class="form-control rounded-5" id="startDatePicker" name="from" placeholder="Select From">
           <input type="text" class="form-control rounded-5" id="endDatePicker" placeholder="Select To">
         </div>
       </div>
-      <div class="col-sm-2 d-flex justify-content-end">      
+      <div class="col-md-2 d-flex justify-content-end">      
         <button type="button" class="btn btn-primary rounded-5" id="exportToExcel" aria-haspopup="true" aria-expanded="false">
           Export to Excel
         </button>
@@ -92,11 +92,11 @@
     <div class="row">
       <div class="btn-group">
         <button class="badge text-bg-secondary rounded-5" disabled>Question Number</button>
-        <div class="col-sm-1">
+        <div class="col-md-1">
           <input type="text" class="form-control rounded-5" placeholder="Qty #" oninput="addNumberFilter()" id="numberFilter">
         </div>
         <button class="badge text-bg-secondary rounded-5" disabled>Question Name</button>
-        <div class="col-sm-4">
+        <div class="col-md-4">
           <input type="text" class="form-control rounded-5" placeholder="Qty Name" oninput="addTextFilter()" id="textFilter">
         </div>
       </div>

@@ -16,14 +16,16 @@
   bottom: 0px;
   background-color: white;
 }
-table tr td{
+
+table tr td {
   vertical-align: top;
 }
+
 table th {
   text-align: center;
   vertical-align: bottom;
-} 
-  
+}
+
 ul {
   margin: 0;
 }
@@ -50,7 +52,7 @@ ul {
   width: 100%;
 }
 
-.table-condensed{
+.table-condensed {
   font-size: 100%;
 }
 
@@ -60,38 +62,14 @@ ul {
   align-items: center;
 }
 
-#difficult-list-group .list-group {
-  width: 150px;
-  height: 150px;
-  overflow-y: scroll;
-}
-
-#discordButton {
-  border: 1px solid black;
-  background: blue;
-  color: white;
-  font-size: large;
-}
-
-#discordMsg {
-  color: black;
-  background-color: white;
-}
-
 #difficult-list-group .dropdown-menu {
-  width: 150px;
+  /* Removed fixed width (width: 150px;) */
   max-height: 150px;
   overflow-y: auto;
 }
 
-#type-list-group .list-group {
-  width: 250px;
-  height: 250px;
-  overflow-y: scroll;
-}
-
 #type-list-group .dropdown-menu {
-  width: 250px;
+  /* Removed fixed width (width: 250px;) */
   max-height: 250px;
   overflow-y: auto;
 }

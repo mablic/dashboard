@@ -85,8 +85,8 @@ class homeView(ListView):
         return context
 
     def get_queryset(self, *args ,**kwargs):
-        print(f"THE GET QUERY: {self.request.GET}")
-        print(f"IN GET QUERYSET KWARGS: {self.args} and Keys: {self.kwargs}")
+        # print(f"THE GET QUERY: {self.request.GET}")
+        # print(f"IN GET QUERYSET KWARGS: {self.args} and Keys: {self.kwargs}")
         filterQuery = LeetCode.objects.all()
 
         if 'userName' in self.request.GET:
