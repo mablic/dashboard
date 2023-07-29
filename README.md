@@ -1,4 +1,4 @@
-# dashboard
+# Study Group
 
 https://studygrouppal.com/
 
@@ -42,34 +42,18 @@ Our website aims to achieve the following objectives:
 **Key Features**
 
  - LeetCode Question Review: Access a comprehensive database of LeetCode questions with various filters to easily find and review specific problems.
-
- - Filtering Options: Filter questions by type (e.g., arrays, strings), difficulty level (easy, medium, hard), question number, and name for efficient study sessions.
-
- - Collaborative Help Center: Engage in a community-driven help center where users can seek assistance on specific LeetCode problems and offer solutions to others.
-
- - Study Check-ins and Calendar View: Keep track of completed LeetCode questions by checking them off and view the study progress in a convenient calendar layout.
-
- - Study Time Review: Review and analyze study time records with interactive charts, including pie charts, bar charts, and line charts for better understanding of study habits.
-
+ - Study Check-ins and Calendar View: Keep track of completed LeetCode questions by checking them off and viewing the study progress in a convenient calendar layout.
+ - Study Time Review: Review and analyze study time records with interactive charts, including pie charts, bar charts, and line charts for a better understanding of study habits.
  - Editable Study Records: Allow users to modify historical study time entries for accurate data representation and continuous improvement.
-
- - User-Friendly Interface: Experience a user-friendly and intuitive interface for easy navigation and a seamless learning journey.
-
  - Data Visualization: Utilize visually appealing charts and graphs to present study data in a clear and engaging manner.
-
- - Personalized Study Plans: Create and manage personalized study plans to tailor learning according to individual goals and needs.
-
- - Responsive Design: Enjoy a responsive website design that adapts to various devices, ensuring a consistent user experience across platforms.
-
  - Community Engagement: Foster a sense of community by connecting with other users, exchanging knowledge, and supporting one another in the learning process.
 
- - Progress Tracking: Monitor and measure progress over time to stay motivated and achieve coding milestones.
 
- - Secure User Accounts: Ensure the security of user accounts and data with robust authentication measures.
-
- - User Profile Customization: Customize user profiles with personal information and study preferences.
-
- - Regular Updates: Continuously enhance the website with new features, improvements, and bug fixes to provide an optimal learning experience.
+![Pic6](https://github.com/mablic/dashboard/assets/19805677/0b1acf21-06b1-4ac0-ad0a-2595817f60d2)
+<img width="908" alt="Pic2" src="https://github.com/mablic/dashboard/assets/19805677/8cb4fed4-e640-4453-9576-30c0acd41389">
+<img width="904" alt="Pic3" src="https://github.com/mablic/dashboard/assets/19805677/c882b998-59c7-4981-b459-d7cbddbe55b5">
+<img width="916" alt="Pic4" src="https://github.com/mablic/dashboard/assets/19805677/7206cbc0-9774-42ee-97af-60f56e315e12">
+<img width="892" alt="Pic5" src="https://github.com/mablic/dashboard/assets/19805677/e53f88f2-8da1-4f7d-ab92-55754e077d00">
 
 
 **Contributing**
