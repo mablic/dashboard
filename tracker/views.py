@@ -5,7 +5,8 @@ from django.db.models.expressions import RawSQL
 from .models import StudyTracker
 from django.http import HttpResponse, JsonResponse
 from .models import StudyTracker, GoalTracker
-from django.db.models import Q, Avg, F
+from django.db.models import Q, Avg, Sum
+from django.db.models.functions import TruncDate
 from datetime import datetime, timedelta
 from json import dumps
 from bson.objectid import ObjectId
@@ -62,11 +63,15 @@ class trackerView(ListView):
                     Q(userId=currentUserId) | Q(discordUserId=discordUserId),
                     studyDate__gte=startDate,
                     studyDate__lte=endDate
-                ).order_by('studyDate')
+                ).values('studyDate', 'studyTime', 'studyTopic').order_by('studyDate')
                 allQuery = filterQuery.filter(
                     studyDate__gte=startDate,
                     studyDate__lte=endDate
-                ).values('studyDate').annotate(avg_studyTime=Avg('studyTime')).order_by('studyDate')
+                ).values('studyDate', 'studyTime', 'studyTopic').order_by('studyDate')
+                # allQuery = filterQuery.filter(
+                #     studyDate__gte=datetime(2023,7,30),
+                #     studyDate__lte=datetime(2023,7,30)
+                # ).values('studyDate', 'studyTime', 'studyTopic')
                 data = {
                     'userData': list(userQuery.values()),
                     'avgData': list(allQuery.values())
