@@ -19,7 +19,8 @@ $(document).ready(function() {
       { data: 'studyDate' },
       { data: 'studyTopic' },
       { data: 'studyTime' }
-    ]
+    ],
+    order: [[0, 'desc']]
   });
 
   // Handle click on a row to open the modal with row data

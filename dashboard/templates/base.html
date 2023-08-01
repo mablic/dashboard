@@ -38,21 +38,25 @@
 </head>
 
 <body>
-  
   <div class="container-fluid d-flex vh-2 p-0">
     <div id="carouselSlidesOnly" class="carousel slide w-100" data-bs-ride="carousel" style="margin-bottom: 0">
       <div class="carousel-inner h-100">
-        <div class="carousel-item active h-100">
+        <div class="carousel-item active h-100" style="background: black">
           <div class="b-divider">
             {% if user.is_authenticated %}
-              <h2><a class="nav-link" href="{% url 'home' %}">нι {{user.username}}, ωєℓ¢σмє тσ тнє ʂƚυԃყ ɠɾσυρ</a></h2>
+            <h2>
+              <a class="nav-link" href="{% url 'home' %}">
+                <img src="{% static 'dashboard/image/hi.png' %}">
+                </img>{{user.username}}
+                <img src="{% static 'dashboard/image/welcome.png' %}">
+                </img>ʂƚυԃყ ɠɾσυρ</a></h2>
             {% else %}
-              <h2><a class="nav-link" href="{% url 'home' %}">ʂƚυԃყ ɠɾσυρ</a></h2>&nbsp;&nbsp;&nbsp;
-              <a class="badge text-bg-primary rounded-5" href="https://discord.gg/study-group-1046106445617311824" target="_blank" style="text-decoration: none;">Discord</a>
-            {% endif %} 
+            <h2><a class="nav-link" href="{% url 'home' %}">ʂƚυԃყ ɠɾσυρ</a></h2>
+            {% endif %}   
+            &nbsp;&nbsp;&nbsp;<a class="badge text-bg-primary rounded-5" href="https://discord.gg/study-group-1046106445617311824" target="_blank" style="text-decoration: none;">Discord</a>
           </div>
         </div>
-        <div class="carousel-item h-100">
+        <div class="carousel-item h-100" style="background: black">
           <div class="b-divider">
             <h2><a class="nav-link">ᴇxᴘʟᴏʀᴇ ᴊᴏʙᴘᴜʟsᴇ</a></h2>&nbsp;&nbsp;&nbsp;
             <a class="badge text-bg-primary rounded-5" href="https://jobpulse.fyi/" target="_blank" style="text-decoration: none;">JobPluse</a>
