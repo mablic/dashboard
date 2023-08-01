@@ -7,12 +7,16 @@ body {
   font-family: "Calibri", "Segoe UI", Arial, sans-serif;
 }
 
+#customColor {
+  background-color: rgb(255, 200, 0);
+}
+
 .nav-link {
   font-size: 25px;
 }
   
 .carousel {
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
 }
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
@@ -131,4 +135,12 @@ body {
 .header-topic {
   font-size: 3.5rem;
   font-weight: bold;
+}
+
+#carouselSlidesOnly {
+  height: 5%;
+}
+
+.custom-carousel .carousel-inner {
+  padding: 0;
 }
