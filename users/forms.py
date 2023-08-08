@@ -14,11 +14,11 @@ class UserRegisterForm(UserCreationForm):
 
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()
-    discordServer = forms.CharField()
+    # discordServer = forms.CharField()
 
     class Meta:
         model = User
-        fields = ['email', 'discordServer']
+        fields = ['email']
 
 
 class ProfileUpdateForm(forms.ModelForm):
