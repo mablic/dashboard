@@ -22,12 +22,31 @@
                 <li class="nav-item" role="presentation">
                   <button class="nav-link rounded-5" id="profile-tab2" data-bs-target="#nav-table" data-bs-toggle="tab" type="button" role="tab" aria-selected="false" tabindex="-1">Table</button>
                 </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link rounded-5" id="contact-tab2" data-bs-target="#nav-rank" data-bs-toggle="tab" type="button" role="tab" aria-selected="true" onclick="loadRank()">Rank</button>
+                </li>
                 <!-- <li class="nav-item" role="presentation">
                   <button class="nav-link rounded-5" id="contact-tab2" data-bs-target="#nav-goal" data-bs-toggle="tab" type="button" role="tab" aria-selected="true">Goal</button>
                 </li> -->
               </ul>
             </nav>
           </div>
+        </div>
+        <!-- <div class="container">
+          <div class="row">
+            <div class="col-md-2" style="text-align: left;">
+              <button type="button" class="btn btn-secondary rounded-5" disabled>
+                Start Date <span class="badge badge-light">1-1-2020</span>
+              </button>
+            </div>
+            <div class="col-md-2" style="text-align: left;">
+              <button type="button" class="btn btn-secondary rounded-5" disabled>
+                End Date <span class="badge badge-light">1-1-2020</span>
+              </button>
+            </div>
+          </div>
+        </div> -->
+
         </div>
         <div class="tab-content" id="nav-tabContent">
           <!-- This is the standard table view -->
@@ -36,6 +55,9 @@
           </div>
           <div class="tab-pane fade" id="nav-table" role="tabpanel" aria-labelledby="nav-checkin-tab" tabindex="0">
             {% include "tracker/trackerTable.html" %}
+          </div>
+          <div class="tab-pane fade" id="nav-rank" role="tabpanel" aria-labelledby="nav-checkin-tab" tabindex="0">
+            {% include "tracker/trackerRank.html" %}
           </div>
         </div>
       </div>

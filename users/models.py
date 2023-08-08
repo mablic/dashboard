@@ -8,6 +8,7 @@ class Profile(models.Model):
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
     discordId = models.CharField(max_length=255, blank=True, null=True)
     discordName = models.CharField(max_length=255, blank=True, null=True)
+    discordServer = models.CharField(default='Chinese', max_length=255, blank=True, null=True)
 
     def __str__(self):
         return f'{self.user.username} Profile'

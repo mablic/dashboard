@@ -1,34 +1,69 @@
 {% extends "base.html" %}
+{% load socialaccount %}
+{% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="container">
-  <div class="content-section">
-    <form method="POST">
-      {% csrf_token %}
-      <fieldset class="form-group">
-        <legend class="border-bottom mb-4">
-          Login
-        </legend>
-        {{ form|crispy }}
-      </fieldset>
-      <div class="form-group">
-        <button class="btn btn-outline-info" type="submit">
-          Login
-        </button>
-        <small class="text-muted ml-2">
-          <a href="{% url 'password_reset' %}">Forgot Password?</a>
-        </small>
-      </div>
-    </form>
-    <div class="border-top pt-3">
-      <small class="text-muted">
-        Need An Account? 
-        <a class="ml-2" href="{% url 'register' %}">
-          Sign Up Today
-        </a>
-      </small>
-    </div>
-  </div>
-</div>
 
+<div style="background: linear-gradient(to bottom, rgb(0, 139, 214), white);">
+  <section style="height: 80vh;">
+    <div class="px-4 py-5 px-md-5 text-center text-lg-start" style="height: 100%;">
+      <div class="container" style="height: 100%;">
+        <div class="row gx-lg-5 align-items-center" style="height: 80%;">
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <h1 class="my-5 display-3 fw-bold ls-tight">
+              Embrace the <br />
+              <span class="text-primary">magnificence of your journey</span>
+            </h1>
+            <p style="color: hsl(217, 10%, 50.8%)">
+              Amidst life's bustling rhythm, take a serene moment to step back and embrace the magnificence of your journey. Each step forward is adorned with invaluable experiences, shaping the tapestry of your soul. Embrace the path that led you here and relish the promise of the paths yet to come. 
+            </p>
+          </div>
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <div class="card">
+              <div class="card-body py-5 px-md-5">
+                <form method="POST">
+                  {% csrf_token %}
+                  <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">
+                      Login
+                    </legend>
+                    {{ form|crispy }}
+                  </fieldset>
+                  <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">
+                      Login
+                    </button>
+                    <small class="text-muted ml-2">
+                      <a href="{% url 'password_reset' %}">Forgot Password?</a>
+                    </small>
+                  </div>
+                </form>
+
+                <!-- Register buttons -->
+                <div class="text-center">
+                  <p>or sign up with:</p>
+                  <button type="button" class="btn btn-link btn-floating mx-1">
+                    <a href="{% provider_login_url 'discord' %}">
+                      <i class="bi bi-discord" style="font-size: 3em;"></i>
+                    </a>
+                  </button>
+                  <button type="button" class="btn btn-link btn-floating mx-1">
+                    <a href="{% provider_login_url 'google' %}">
+                      <i class="bi bi-google" style="font-size: 3em;"></i>                   
+                    </a>
+                  </button>
+                  <!-- <button type="button" class="btn btn-link btn-floating mx-1">
+                    <a href="{% provider_login_url 'github' %}">
+                      <i class="bi bi-github" style="font-size: 3em;"></i>   
+                    </a>
+                  </button> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
 {% endblock content %}

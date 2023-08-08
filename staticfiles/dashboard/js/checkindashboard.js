@@ -32,9 +32,9 @@ function viewCheckin(ret) {
 }
 
 function addToCheckInView(result){
-  // console.log(result)
+  console.log(result)
   for (var ret in result['checkInTime']){
-    // console.log(result['checkInTime']);
+    console.log(result['checkInTime']);
     addCheckIn(result['checkInTime'][ret], result['questionNo'][ret]);
   }
 }
@@ -49,7 +49,7 @@ function addCheckInCheck(ret) {
   var questionNo = $(ret).attr('questionno');
 
   if (!currentUser){
-    // console.log("NOT IN USER." + currentUser)
+    console.log("NOT IN USER." + currentUser)
     var toastCard = $('#toastBody');
     toastCard.text("Please login");
     $('.toast').toast('show');
@@ -83,10 +83,10 @@ function addCheckInCheck(ret) {
     });
   }else{   
     var currId = $(ret).attr('id').replace("checkInDelete","");
-    // console.log(currId);
+    console.log(currId);
     var currentTab = $('#checkIn'+currId);
     checkInTime = currentTab[0].querySelector('span').textContent;
-    // console.log('checkTime is:' + checkInTime);
+    console.log('checkTime is:' + checkInTime);
     $.ajax({
       type: 'post',
       headers: { "X-CSRFToken": csrftoken },

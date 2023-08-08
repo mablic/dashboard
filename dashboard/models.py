@@ -35,14 +35,7 @@ class LeetCode(models.Model):
             for tmpItm in tmpList:
                 outList.add(tmpItm)
         return list(outList)
-
-
-    # class Meta:
-    #     ordering = ["-questionNo"]
-# class LeetCodeFilter(django_filters.FilterSet):
-#     class Meta:
-#         model = LeetCode
-#         fields = ['name', 'price', 'manufacturer']
+    
 
 class UserAnswer(models.Model):
     leetCodeNo = models.IntegerField()
@@ -54,6 +47,12 @@ class UserAnswer(models.Model):
 
     def __str__(self):
         return "leetCode:" + str(self.leetCodeNo) + "; userName:" + str(self.userName)
+    
+    def update_user_id(oldUserId, newUseId):
+        userAnswers = UserAnswer.objects.filter(userId=oldUserId)
+        for ans in userAnswers:
+            ans.userId = newUseId
+            ans.save()
 
 
 class CheckIn(models.Model):
@@ -69,3 +68,11 @@ class CheckIn(models.Model):
 
     def __str__(self):
         return "UserName:" + str(self.userName) + "; userId:" + str(self.userDiscordId) + "; Time:" +str(self.checkInTime)
+    
+    def update_user_id(oldUserId, newUseId):
+        userCheckIn = CheckIn.objects.filter(userId=oldUserId)
+        print(userCheckIn)
+        for checkIn in userCheckIn:
+            checkIn.userId = newUseId
+            print(f"checkin is: {checkIn}")
+            checkIn.save()

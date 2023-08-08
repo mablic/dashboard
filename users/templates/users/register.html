@@ -1,31 +1,68 @@
 {% extends "base.html" %}
+{% load socialaccount %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="container">
-  <div class="content-section">
-    <form method="POST">
-      {% csrf_token %}
-      <fieldset class="form-group">  
-        <legend class="border-bottom mb-4">
-          Join Today
-        </legend>
-        {{ form|crispy }}
-      </fieldset>
-      <div class="form-group">
-        <button class="btn btn-outline-info" type="submit">
-          Sign Up
-        </button>
+
+<div style="background: linear-gradient(to bottom, rgb(0, 139, 214), white);">
+  <section style="height: 80vh;">
+    <div class="mask d-flex align-items-center gradient-custom-3" style="height: 100%;">
+      <div class="container" style="height: 100%;">
+        <div class="row d-flex justify-content-center align-items-center" style="height: 100%;">
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <div class="card" style="border-radius: 15px;">
+              <div class="card-body p-5">
+                <form method="POST">
+                  {% csrf_token %}
+                  <fieldset class="form-group">  
+                    {{ form|crispy }}
+                  </fieldset>
+                  <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">
+                      Sign Up
+                    </button>
+                  </div>
+                </form>
+                <small class="text-muted">
+                  Already Have An Account? 
+                  <a class="ml-2" href="{% url 'login' %}">
+                    Sign In
+                  </a>
+                </small>
+                <!-- Register buttons -->
+                <div class="border-top pt-3">
+                  <p>or sign up with:</p>
+                  <button type="button" class="btn btn-link btn-floating mx-1">
+                    <a href="{% provider_login_url 'discord' %}">
+                      <i class="bi bi-discord" style="font-size: 3em;"></i>
+                    </a>
+                  </button>
+                  <button type="button" class="btn btn-link btn-floating mx-1">
+                    <a href="{% provider_login_url 'google' %}">
+                      <i class="bi bi-google" style="font-size: 3em;"></i>                   
+                    </a>
+                  </button>
+                  <!-- <button type="button" class="btn btn-link btn-floating mx-1">
+                    <a href="{% provider_login_url 'github' %}">
+                      <i class="bi bi-github" style="font-size: 3em;"></i>   
+                    </a>
+                  </button> -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <h1 class="my-5 display-3 fw-bold ls-tight">
+              Your journey <br />
+              <span class="text-primary">start here</span>
+            </h1>
+            <p style="color: hsl(217, 10%, 50.8%)">
+              Take the first step towards academic excellence by registering on our website, where you can effortlessly track your study progress, paving the way for success and turning your dreams into reality.
+            </p>
+          </div>
+        </div>
       </div>
-    </form>
-    <div class="border-top pt-3">
-      <small class="text-muted">
-        Already Have An Account? 
-        <a class="ml-2" href="{% url 'login' %}">
-          Sign In
-        </a>
-      </small>
     </div>
-  </div>
+  </section>
 </div>
 
 {% endblock content %}

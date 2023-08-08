@@ -30,13 +30,20 @@ let GLOBAL_TRACKER_LIST = {
   groupChartLabel: [],
   groupChartData: [],
   chartDateTime: new Date(),
+  trackerType: 'chart',
 };
 
 let GLOBAL_TRACKER_PRESENTATION = {
   type: ['bar', 'doughnut', 'line'],
-  name: ['chart1', 'chart2', 'chart3'],
+  name: ['chart1', 'chart2', 'chart3', 'chart4'],
   label: ['groupChartLabel', 'groupChartLabel', 'dateChartLabel'],
-  data: ['groupChartData', 'groupChartData', 'dateChartDate'] 
+  data: ['groupChartData', 'groupChartData', 'dateChartDate'],
+  startDate: '1/1/2020',
+  endDate: '1/1/2020'
+}
+
+function compareSecondElement(a, b) {
+  return b[1] - a[1];
 }
 
 function getDiscordUserId(){
@@ -68,10 +75,36 @@ function getDates(inDate, chartType){
   // console.log("In date:", inDate);
   // console.log("Previous Monday:", startDate);
   // console.log("Next Sunday:", endDate);
+  GLOBAL_TRACKER_PRESENTATION.startDate = startDate;
+  GLOBAL_TRACKER_PRESENTATION.endDate = endDate;
+
   return [startDate, endDate];
 }
 
+function loadRank(){
+  destroyAllCharts();
+  GLOBAL_TRACKER_LIST.chartType = 'rank';
+  var todayDate = GLOBAL_TRACKER_LIST.chartDateTime;
+  var [startDate, endDate] = getDates(todayDate, GLOBAL_TRACKER_LIST.chartPeriod);
+  startDate = formatDateToMMDDYYYY(startDate);
+  endDate = formatDateToMMDDYYYY(endDate);
+  $.ajax({
+    type: 'post',
+    dataType: "json",
+    url: "/tracker/",
+    data: {
+      'postType': 'rankView',
+      'startDate': startDate,
+      'endDate': endDate,
+    },
+    headers: { "X-CSRFToken": csrftoken },
+  }).done(function(result) {
+    updateRankChart(result);
+  });
+}
+
 function getData(){
+  GLOBAL_TRACKER_LIST.chartType = 'chart';
   var currentUserId = getUserId();
   var todayDate = GLOBAL_TRACKER_LIST.chartDateTime;
   var discordUserId = getDiscordUserId();
@@ -136,6 +169,7 @@ function initialChartData(){
 }
 
 function loadStudy(){
+  destroyAllCharts();
   initialChartData();
 }
 
@@ -147,14 +181,21 @@ document.addEventListener('DOMContentLoaded', function() {
 document.getElementById('viewByWeekBtn').addEventListener('click', function() {
   GLOBAL_TRACKER_LIST.chartPeriod = "week";
   GLOBAL_TRACKER_LIST.chartDateTime = new Date();
-  // console.log("TRACKER TIME:" + GLOBAL_TRACKER_LIST.chartDateTime);
-  getData();
+  if (GLOBAL_TRACKER_LIST.chartType == 'rank'){
+    loadRank();
+  }else{
+    getData();
+  }
 });
 
 document.getElementById('viewByMonthBtn').addEventListener('click', function() {
   GLOBAL_TRACKER_LIST.chartPeriod = "month";
   GLOBAL_TRACKER_LIST.chartDateTime = new Date();
-  getData();
+  if (GLOBAL_TRACKER_LIST.chartType == 'rank'){
+    loadRank();
+  }else{
+    getData();
+  }
 });
 
 document.getElementById('prevBtn').addEventListener('click', function() {
@@ -166,7 +207,11 @@ document.getElementById('prevBtn').addEventListener('click', function() {
   }
   // console.log('next today date after:', GLOBAL_TRACKER_LIST.chartDateTime);
   // console.log("TRACKER TIME:" + GLOBAL_TRACKER_LIST.chartDateTime);
-  getData();
+  if (GLOBAL_TRACKER_LIST.chartType == 'rank'){
+    loadRank();
+  }else{
+    getData();
+  }
 });
 
 document.getElementById('nextBtn').addEventListener('click', function() {
@@ -177,7 +222,11 @@ document.getElementById('nextBtn').addEventListener('click', function() {
     GLOBAL_TRACKER_LIST.chartDateTime = new Date( GLOBAL_TRACKER_LIST.chartDateTime.getFullYear(),  GLOBAL_TRACKER_LIST.chartDateTime.getMonth() + 1,  GLOBAL_TRACKER_LIST.chartDateTime.getDate());
   }
   // console.log('next today date after:', GLOBAL_TRACKER_LIST.chartDateTime);
-  getData();
+  if (GLOBAL_TRACKER_LIST.chartType == 'rank'){
+    loadRank();
+  }else{
+    getData();
+  }
 });
 
 function clearAllChartData(){
@@ -270,10 +319,22 @@ function updateAllChart(){
   }
 }
 
+function destroyAllCharts() {
+  
+  for (let i=0; i<GLOBAL_TRACKER_PRESENTATION.name.length; i++){
+    var ctx = document.getElementById(GLOBAL_TRACKER_PRESENTATION.name[i]).getContext('2d');
+    var existingChart = Chart.getChart(ctx);
+    if (existingChart) {
+      existingChart.destroy();
+    }
+  }
+}
+
 // Function to update the chart based on the chart type and data
 function updateChart(chartType, chartName, labelName, dataName) {
   var label = GLOBAL_TRACKER_LIST[labelName];
   var data = GLOBAL_TRACKER_LIST[dataName];
+  const reportName = 'Report Period (mins): ' + formatDateToMMDDYYYY(GLOBAL_TRACKER_PRESENTATION.startDate) + ' to ' + formatDateToMMDDYYYY(GLOBAL_TRACKER_PRESENTATION.endDate);
   // console.log("chartType is: " + chartType);
   
   var ctx = document.getElementById(chartName).getContext('2d');
@@ -310,6 +371,12 @@ function updateChart(chartType, chartName, labelName, dataName) {
             beginAtZero: true,
           },
         },
+        plugins: {
+          title: {
+            display: true,
+            text: reportName, 
+          },
+        },
       },
     });
   }else{
@@ -336,4 +403,35 @@ function updateChart(chartType, chartName, labelName, dataName) {
       },
     });
   }
+}
+
+function updateRankChart(ret){
+  // console.log(ret);
+  label = [];
+  data = [];
+  ret.sort(compareSecondElement);
+  for (let i=0; i < ret.length; i++) {
+    label.push(ret[i][0]);
+    data.push(ret[i][1]);
+  }
+
+  const reportName = 'Top 10 (mins) - Report Period: ' + formatDateToMMDDYYYY(GLOBAL_TRACKER_PRESENTATION.startDate) + ' to ' + formatDateToMMDDYYYY(GLOBAL_TRACKER_PRESENTATION.endDate);
+  const rank = document.getElementById('chart4').getContext('2d');
+  const rankChart = new Chart(rank, {
+    type: 'bar',
+    data: {
+      labels: label.slice(0, 10),
+      datasets: [{
+          axis: 'y',
+          label: reportName,
+          data: data.slice(0, 10),
+          fill: false,
+          backgroundColor: dataPointColors,
+          borderWidth: 2
+        }],
+    },
+    options: {
+      indexAxis: 'y',
+    }
+  });
 }

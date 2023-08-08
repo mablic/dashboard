@@ -2,39 +2,54 @@
 {% load crispy_forms_tags %}
 {% load static %}
 {% block content %}
-<div class="container">
-  <div class="content-section">
-    {% if user.id != 32 %}
-    <div class="media">
-      <img class="rounded-circle account-img" src="{% static 'users/image/profile.jpg' %}">
-      <div class="media-body">
-          <h2 class="account-heading">{{ user.username }}</h2>
-          <p class="text-s">Discord Name: <mark>{{ user.profile.discordName }}</mark></p>
-          <p class="text-s">Discord Id: <mark>{{ user.profile.discordId }}</mark></p>
-          <p class="text-secondary">{{ user.email }}</p>
-      </div>
-    </div>
-    <form method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-      <fieldset class="form-group">
-          <legend class="border-bottom mb-4">Profile Info</legend>
-          {{ u_form|crispy }}
-          {{ p_form|crispy }}
-      </fieldset>
-      <div class="form-group">
-          <button class="btn btn-outline-info" type="submit">Update</button>
-          <a href="{% url 'authorize' %}" class="btn btn-outline-info">Link Discord Account</a>
-      </div>
-    </form>
-    {% else %}
-      <div class="media">
-        <img class="rounded-circle account-img" src="{% static 'users/image/profile.jpg' %}">
-        <div class="media-body">
+
+<section class="vh-80">
+  <div class="container">
+    <div class="content-section">
+      <div class="row d-flex justify-content-center align-items-center" style="height: 80vh;">
+        <div class="col-lg-6 mb-5 mb-lg-0" style="height: 100%; display: flex; justify-content: center; align-items: center; background: linear-gradient(to bottom, rgb(0, 93, 214), rgb(192, 229, 255));"">
+          {% if user.id != 32 %}
+          <div class="media">
+            <img class="rounded-circle account-img" src="{% static 'users/image/profile.jpg' %}">
             <h2 class="account-heading">{{ user.username }}</h2>
+            <div class="media-body" style="color: white; text-align: left;">
+                <p class="text-s">Discord Name: <mark>{{ user.profile.discordName }}</mark></p>
+                <p class="text-s">Discord Id: <mark>{{ user.profile.discordId }}</mark></p>
+                <p class="text-s">Emai: <mark>{{ user.email }}</mark></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 mb-5 mb-lg-0" style="height: 100%; display: flex; justify-content: center; align-items: center;">
+          
+          <form method="POST" enctype="multipart/form-data">
+            <h1 class="my-5 display-3 fw-bold ls-tight">
+              Update or Link <br />
+              <span class="text-primary">your profile</span>
+            </h1>
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Profile Info</legend>
+                {{ u_form|crispy }}
+                {{ p_form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-primary" type="submit">Update</button>
+                <a href="{% url 'authorize' %}" class="btn btn-primary">Link Discord Account</a>
+            </div>
+          </form>
+          {% else %}
+            <div class="media">
+              <img class="rounded-circle account-img" src="{% static 'users/image/profile.jpg' %}">
+              <div class="media-body">
+                  <h2 class="account-heading">{{ user.username }}</h2>
+              </div>
+            </div>
+          {% endif %}
         </div>
       </div>
-    {% endif %}
+    </div>
   </div>
-</div>
+</section>
+
 
 {% endblock content %}

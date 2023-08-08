@@ -15,7 +15,9 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('authorize/', user_views.authorize, name='authorize'),
-    path('callback/', user_views.callback, name='callback'),
+    path('callback/<str:provider>/', user_views.callback, name='callback'),
+    path('accounts/<str:provider>/login/', user_views.login_with_vendor, name='login_with_vendor'),
+    path('accounts/', include('allauth.urls')),
     path('password-reset/',
          auth_views.PasswordResetView.as_view(
              template_name='users/password_reset.html'

@@ -238,7 +238,10 @@ class homeView(ListView):
             userDiscordId = request.POST['userDiscordId']
             try:
                 # print(f"Current checkIn Question is: {questionNo} . UserDiscordID is: {userDiscordId} . userId is: {userId}")
-                currObject = CheckIn.objects.filter(userId=userId, userDiscordId=userDiscordId, questionNo=questionNo)
+                currObject = CheckIn.objects.filter(
+                    Q(userId=userId) | Q(userDiscordId=userDiscordId),
+                    # userId=userId, userDiscordId=userDiscordId, 
+                    questionNo=questionNo)
                 # print("Current currObject is: ")
                 checkInList = []
                 checkInQuestList = []
@@ -260,7 +263,10 @@ class homeView(ListView):
             checkInTime = request.POST['checkInTime']
             # print("in the post add checkin:" + userDiscordId)
             try:
-                currObject = CheckIn.objects.filter(userId=userId, userDiscordId=userDiscordId, checkInTime=checkInTime, questionNo=questionNo)
+                currObject = CheckIn.objects.filter(
+                    Q(userId=userId) | Q(userDiscordId=userDiscordId),
+                    # userId=userId, userDiscordId=userDiscordId, 
+                    checkInTime=checkInTime, questionNo=questionNo)
                 context = {
                     'checkIn': False,
                 }
@@ -286,9 +292,10 @@ class homeView(ListView):
                 context = {
                     'checkIn': False,
                 }
-                print(f"Remove checkIn/ userId:{userId}, userDiscordId:{userDiscordId}, checkInTime:{checkInTime}, questionNo:{questionNo}")
-                CheckIn.objects.filter(userId=userId, userDiscordId=userDiscordId, checkInTime=datetime.strptime(checkInTime, "%Y-%m-%d"), questionNo=questionNo).delete()
-                print("remove checkIn post")
+                CheckIn.objects.filter(
+                    Q(userId=userId) | Q(userDiscordId=userDiscordId),
+                    # userId=userId, userDiscordId=userDiscordId, 
+                    checkInTime=datetime.strptime(checkInTime, "%Y-%m-%d"), questionNo=questionNo).delete()
                 context['checkIn'] = True
             except:
                 print(f"Error while remove checkIn for users {userId} checkIn on leetCode {questionNo}")
