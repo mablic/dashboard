@@ -21,7 +21,7 @@ ALLOWED_HOSTS = ['studygrouppal.com', 'sdashboard.herokuapp.com']
 DISCORD_REDIRECT_URI = 'https://' + ALLOWED_HOSTS[0] + '/callback'
 
 # Debug
-# DEBUG = True
+DEBUG = True
 # ALLOWED_HOSTS = ['127.0.0.1']
 # DISCORD_REDIRECT_URI = 'http://' + ALLOWED_HOSTS[0] + ':8000/callback'
 
