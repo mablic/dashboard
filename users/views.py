@@ -48,8 +48,8 @@ def register(request):
     return render(request, 'users/register.html', {'form': form})
 
 def callback(request, provider):
-    print("IN THE CALL BACK!")
-    print(request)
+    # print("IN THE CALL BACK!")
+    # print(request)
     # source = request.GET.get('source')
     print(f"provider is:{provider}")
     if provider == 'discord':
@@ -65,9 +65,10 @@ def callback(request, provider):
     return render(request, 'users/profile.html', context)
 
 def discord_callback(request, provider):
+    discordApp = SocialApp.objects.get(provider=provider)
     params = {
-        'client_id': settings.DISCORD_CLIENT_ID,
-        'client_secret': settings.DISCORD_CLIENT_SECRET,
+        'client_id': discordApp.client_id,
+        'client_secret': discordApp.secret,
         'grant_type': 'authorization_code',
         'code': request.GET.get('code'),
         'redirect_uri': generate_redirect_uri(request, provider),
@@ -157,22 +158,26 @@ def google_callback(request, provider):
 
 
 def login_with_vendor(request, provider):
-    print(f"Request is: {request}")
-    print(f"Provider is {provider}")
+    # print(f"Request is: {request}")
+    # print(f"Provider is {provider}")
     if provider == 'discord':
-        params = {
-            'client_id': settings.DISCORD_CLIENT_ID,
-            'redirect_uri': generate_redirect_uri(request, provider),
-            'response_type': 'code',
-            'scope': 'identify',  # Add more scopes as needed
-        }
-        authUrl = f'{URL_TOKEN.discordAuthUrl}?{"&".join(f"{k}={v}" for k, v in params.items())}'
-        # print(authUrl)
-        # print(generate_redirect_uri(request, provider))
-        return redirect(authUrl)
+        try:
+            discordApp = SocialApp.objects.get(provider=provider)
+            params = {
+                'client_id': discordApp.client_id,
+                'redirect_uri': generate_redirect_uri(request, provider),
+                'response_type': 'code',
+                'scope': 'identify',  # Add more scopes as needed
+            }
+            authUrl = f'{URL_TOKEN.discordAuthUrl}?{"&".join(f"{k}={v}" for k, v in params.items())}'
+            # print(authUrl)
+            # print(generate_redirect_uri(request, provider))
+            return redirect(authUrl)
+        except SocialApp.DoesNotExist:
+            return render(request, 'users/error.html')
     elif provider == 'google':
         try:
-            googleApp = SocialApp.objects.get(provider='google')
+            googleApp = SocialApp.objects.get(provider=provider)
             scope = 'email profile'
             auth_params = {
                 'client_id': googleApp.client_id,

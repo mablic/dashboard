@@ -7,8 +7,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PARENT_DIR = os.path.dirname(BASE_DIR)
 mimetypes.add_type("text/javascript", ".js", True)
 SECRET_KEY = os.environ.get('SECRET_KEY')
-DISCORD_CLIENT_ID = os.environ.get('DISCORD_CLIENT_ID')
-DISCORD_CLIENT_SECRET = os.environ.get('DISCORD_CLIENT_SECRET')
+# DISCORD_CLIENT_ID = os.environ.get('DISCORD_CLIENT_ID')
+# DISCORD_CLIENT_SECRET = os.environ.get('DISCORD_CLIENT_SECRET')
 
 SITE_ID = 2
 
