@@ -2,38 +2,70 @@
 {% load static %}
 {% block content %}
 
+
 <div class="container">
   <div class="row mt-4 mb-4">
     <div class="row mb-4">
-      <div class="col text-center">
-        <button type="button" class="btn btn-primary rounded-5" id="prevBtn">Previous</button>
-        <button type="button" class="btn btn-primary rounded-5" id="viewByWeekBtn">View by Week</button>
-        <button type="button" class="btn btn-primary rounded-5" id="viewByMonthBtn">View by Month</button>
-        <button type="button" class="btn btn-primary rounded-5" id="nextBtn">Next</button>
+      <div class="col-md-1 text-left">
+        <a class="btn btn-danger rounded-5" href="{% url 'home' %}#studyTracker" style="color: white;">Instruction</a>
       </div>
+      <div class="col-md-10 text-center">
+          <button type="button" class="btn btn-primary rounded-5" id="prevBtn">Previous</button>
+          <button type="button" class="btn btn-primary rounded-5" id="viewByWeekBtn">View by Week</button>
+          <button type="button" class="btn btn-primary rounded-5" id="viewByMonthBtn">View by Month</button>
+          <button type="button" class="btn btn-primary rounded-5" id="nextBtn">Next</button>
+      </div>
+
       <div class="container">
         <div class="row">
-          <div class="col-md-4">
-            <nav class="smaller-nav">
+          <div class="col-md-6">
+            <!-- <nav class="smaller-nav">
               <ul class="nav nav-pills nav-fill gap-2 p-1 small bg-primary rounded-5 shadow-sm" id="pillNav2" role="tablist" style="--bs-nav-link-color: rgba(255, 255, 255, .75); --bs-nav-link-hover-color: #fff; --bs-nav-pills-link-active-color: var(--bs-primary); --bs-nav-pills-link-active-bg: var(--bs-white);">
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link rounded-5 active" id="home-tab2" data-bs-target="#nav-graph" data-bs-toggle="tab" type="button" role="tab" aria-selected="false" tabindex="-1" onclick="loadStudy()">Study</button>
+                  <button class="nav-link rounded-5 active" id="home-tab2" data-bs-target="#nav-graph" data-bs-toggle="tab" type="button" role="tab" aria-selected="false" tabindex="-1" onclick="load_study()">Study</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link rounded-5" id="profile-tab2" data-bs-target="#nav-table" data-bs-toggle="tab" type="button" role="tab" aria-selected="false" tabindex="-1">Table</button>
+                  <button class="nav-link rounded-5" id="profile-tab2" data-bs-target="#nav-table" data-bs-toggle="tab" type="button" role="tab" aria-selected="false" tabindex="-1">Edit Study Data</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link rounded-5" id="contact-tab2" data-bs-target="#nav-rank" data-bs-toggle="tab" type="button" role="tab" aria-selected="true" onclick="loadRank()">Rank</button>
+                  <button class="nav-link rounded-5" id="contact-tab2" data-bs-target="#nav-goal" data-bs-toggle="tab" type="button" role="tab" aria-selected="true" onclick="load_goal_chart()">Goal</button>
                 </li>
-                <!-- <li class="nav-item" role="presentation">
-                  <button class="nav-link rounded-5" id="contact-tab2" data-bs-target="#nav-goal" data-bs-toggle="tab" type="button" role="tab" aria-selected="true">Goal</button>
-                </li> -->
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link rounded-5" id="contact-tab2" data-bs-target="#nav-rank" data-bs-toggle="tab" type="button" role="tab" aria-selected="true" onclick="load_rank()">Rank</button>
+                </li>
               </ul>
+            </nav> -->
+            <nav class="smaller-nav">
+              <div class="row">
+                <div class="col-md-6"> 
+                  <ul class="nav nav-pills nav-fill gap-2 p-1 small bg-primary rounded-5 shadow-sm" id="pillNav2" role="tablist" style="--bs-nav-link-color: rgba(255, 255, 255, .75); --bs-nav-link-hover-color: #fff; --bs-nav-pills-link-active-color: var(--bs-primary); --bs-nav-pills-link-active-bg: var(--bs-white);">
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link rounded-5 active" id="home-tab2" data-bs-target="#nav-graph" data-bs-toggle="tab" type="button" role="tab" aria-selected="false" tabindex="-1" onclick="load_study()">Study</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link rounded-5" id="profile-tab2" data-bs-target="#nav-table" data-bs-toggle="tab" type="button" role="tab" aria-selected="false" tabindex="-1">Edit Study Data</button>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-md-6"> 
+                  <ul class="nav nav-pills nav-fill gap-2 p-1 small bg-primary rounded-5 shadow-sm" id="pillNav3" role="tablist" style="--bs-nav-link-color: rgba(255, 255, 255, .75); --bs-nav-link-hover-color: #fff; --bs-nav-pills-link-active-color: var(--bs-primary); --bs-nav-pills-link-active-bg: var(--bs-white);">
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link rounded-5 active" id="goalNA" data-bs-toggle="tab" type="button" role="tab" aria-selected="true">NA</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link rounded-5" id="goalGraph" data-bs-target="#nav-goal" data-bs-toggle="tab" type="button" role="tab" aria-selected="true" onclick="load_goal_chart()">Goal</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link rounded-5" id="rankGraph" data-bs-target="#nav-rank" data-bs-toggle="tab" type="button" role="tab" aria-selected="true" onclick="load_rank()">Rank</button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </nav>
           </div>
           <div class="col-md-4">
           </div>
-          <div class="col-md-4">
+          <div class="col-md-2">
             <div class="btn-group">
               <button type="button" class="btn btn-primary dropdown-toggle rounded-5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Find a study room
@@ -47,22 +79,7 @@
             </div>
           </div>
         </div>
-        <!-- <div class="container">
-          <div class="row">
-            <div class="col-md-2" style="text-align: left;">
-              <button type="button" class="btn btn-secondary rounded-5" disabled>
-                Start Date <span class="badge badge-light">1-1-2020</span>
-              </button>
-            </div>
-            <div class="col-md-2" style="text-align: left;">
-              <button type="button" class="btn btn-secondary rounded-5" disabled>
-                End Date <span class="badge badge-light">1-1-2020</span>
-              </button>
-            </div>
-          </div>
-        </div> -->
 
-        </div>
         <div class="tab-content" id="nav-tabContent">
           <!-- This is the standard table view -->
           <div class="tab-pane fade show active" id="nav-graph" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
@@ -74,6 +91,9 @@
           <div class="tab-pane fade" id="nav-rank" role="tabpanel" aria-labelledby="nav-checkin-tab" tabindex="0">
             {% include "tracker/trackerRank.html" %}
           </div>
+          <div class="tab-pane fade" id="nav-goal" role="tabpanel" aria-labelledby="nav-checkin-tab" tabindex="0">
+            {% include "tracker/trackerGoal.html" %}
+          </div>
         </div>
       </div>
     </div>
@@ -82,4 +102,5 @@
 
 <div style="display: none;" id="currentUserId">{{ user.id }}</div>
 <div style="display: none;" id="userDiscordId">{{ user.profile.discordId }}</div>
+
 {% endblock content %}

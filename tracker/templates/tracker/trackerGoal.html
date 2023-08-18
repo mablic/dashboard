@@ -1,0 +1,111 @@
+{% block trackerGoal %}
+{% load static %}
+
+<div class="b-divider-section"></div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8">
+    </div>
+    <div class="col-sm-4 d-flex justify-content-end">
+      <button data-bs-toggle="offcanvas" data-bs-target="#goalSideBar" class="btn btn-primary rounded-5">Edit Goal</button>
+      <!-- <button class="btn btn-primary" type="button"  data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Toggle right offcanvas</button> -->
+    </div>
+  </div>
+  <div class="b-divider-section">
+  </div>
+  <div class="offcanvas offcanvas-end" id="goalSideBar" aria-labelledby="goalTracker" style="width: 50%;" data-bs-backdrop="static">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="goalTracker">My Goals</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="row">
+      <div class="col-sm-2">
+        <button id="addGoalBtn" class="btn btn-primary rounded-5" onclick="show_goal_modal()">Add Goal</button>
+      </div>
+    </div>
+    <div class="b-divider-section"></div>
+    <div class="offcanvas-body">
+      <div class="tableContainer">
+        <table id="goalTable" class="table table-striped" style="width:100%">
+            <thead>
+              <tr>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Goal Topic</th>
+                <th>Goal Target(min|qty)</th>
+                <th>Goal Complete</th>
+              </tr>
+            </thead>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="goalModal" aria-labelledby="goalModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="goalModalLabel">Edit</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="goalForm" style="text-align: left;">
+            <div class="form-group row">
+              <label for="goalStartDate" class="col-sm-4 col-form-label">Start Date</label>
+              <div class="col-sm-8">
+                <input type="date" class="form-control" goalOldValue="" id="goalStartDate" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="goalEndDate" class="col-sm-4 col-form-label">End Date</label>
+              <div class="col-sm-8">
+                <input type="date" class="form-control" goalOldValue="" id="goalEndDate" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="goalTopic" class="col-sm-4 col-form-label">Topic</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" goalOldValue="" id="goalTopic" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="goalTarget" class="col-sm-4 col-form-label">Target(numeric)</label>
+              <div class="col-sm-8">
+                <input type="number" class="form-control" goalOldValue="" id="goalTarget" min="0" placeholder="Numeric Value" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="goalComplete" class="col-sm-4 col-form-label">Complete (numeric)</label>
+              <div class="col-sm-8">
+                <input type="number" class="form-control" goalOldValue="" id="goalComplete" min="0" step="0.01" placeholder="Numeric Value">
+                <small class="invalid-input-note" style="color: red;">Once you enter the complete value, we will not track your study time from the study rooms.</small>
+              </div>
+            </div>      
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button submit" class="btn btn-outline-success" onclick="save_goal_change(event)">Save changes</button>
+              <button type="button" class="btn btn-outline-danger" onclick="delete_goal_change(event)">Delete</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container" id="goalCharts">
+  <div class="row" style="display: none;">
+    <div class="col-md-3">
+      <div class="chart-container">
+        <canvas id="chartPie" width="100%" height="50%"></canvas>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="chart-container">
+        <canvas id="comboChart" width="100%" height="50%"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript" src="{% static 'tracker/js/trackerGoal.js' %}"></script>
+{% endblock %}

@@ -20,16 +20,17 @@
       </div> -->
       <div class="carousel-item active">
         <div class="carousel-caption">
-          <h1 class="header-topic">Visualize the Progress</h1>
+          <h1 class="header-topic">Visualize & Track Study</h1>
           <p>Track and visualize study progress for increased productivity and academic success.</p>
-          <a href="#example" class="btn btn-primary btn-lg rounded-5">See Example</a>
+          <p>An automated tool that dynamically adjusts study targets based on daily study durations, ensuring alignment with evolving habits.</p>
+          <a href="#studyTracker" class="btn btn-primary btn-lg rounded-5">Instruction</a>
         </div>
       </div>
       <div class="carousel-item">
         <div class="carousel-caption text-right">
           <h1 class="header-topic">LeetCode Tracking</h1>
           <p>Effortlessly monitor your coding challenges, analyze performance, and optimize your coding skills.</p>
-          <a href='#checkin' class="btn btn-primary btn-lg rounded-5">Checkmate</a>
+          <a href='#leetCodeBoard' class="btn btn-primary btn-lg rounded-5">Details</a>
         </div>
       </div>
     </div>
@@ -61,17 +62,20 @@
 
     <!-- START THE FEATURETTES -->
 
-  <div id="example"></div>
+  <div id="studyTracker"></div>
   <hr class="featurette-divider">
   <div class="row featurette">
     <div class="col-md-12">
-      <h2 class="featurette-heading">Study Tracker. <span class="text-muted">It'll blow your mind.</span></h2>
-      <p class="lead">Study Tracker: Elevate your learning experience, track your achievements, and stay focused on academic success.</p>
+      <h2 class="featurette-heading">Study with Goal Tracker. <span class="text-muted">It'll blow your mind.</span></h2>
+      <p class="lead">Study Tracker: Elevate your learning experience, track your achievements, and stay focused on academic success. Automated Adjustable Goals: Optimize studying with auto-adjusting goals based on daily progress.</p>
     </div>
   </div>
   <div class="row featurette" style="margin-top: 50px;">
     <div class="col-md-12">
-      <img class="featurette-image img-fluid mx-auto" src="{% static 'dashboard/image/Pic6.png' %}" data-holder-rendered="true">
+      <img class="featurette-image img-fluid mx-auto" src="{% static 'dashboard/image/Step1.png' %}" data-holder-rendered="true">
+    </div>
+    <div class="col-md-12">
+      <img class="featurette-image img-fluid mx-auto" src="{% static 'dashboard/image/Step2.png' %}" data-holder-rendered="true">
     </div>
   </div>
 
@@ -80,14 +84,15 @@
   <div class="row featurette">
     <div class="col-md-7 order-md-2">
       <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
+      <a class="btn btn-danger rounded-5" href="{% url 'tracker' %}">Study Tracker</a>
       <p class="lead">Customize study data and download to Excel for insightful analysis. Stay in control of your progress with our study tracker.</p>
     </div>
     <div class="col-md-5 order-md-1">
-      <img class="featurette-image img-fluid mx-auto" src="{% static 'dashboard/image/Pic2.png' %}" data-holder-rendered="true">
+      <img class="featurette-image img-fluid mx-auto" src="{% static 'dashboard/image/Pic6.png' %}" data-holder-rendered="true">
     </div>
   </div>
 
-  <div id="checkin"></div>
+  <div id="leetCodeBoard"></div>
   <hr class="featurette-divider">
 
   <div class="row featurette">
@@ -96,7 +101,7 @@
       <p class="lead">What to keep track on your leetcode or get help from others? check out our leetcode view board.</p>
     </div>
     <div class="col-md-12">
-      <img class="featurette-image img-fluid mx-auto" src="{% static 'dashboard/image/Pic3.png' %}" data-holder-rendered="true">
+      <img class="featurette-image img-fluid mx-auto" src="{% static 'dashboard/image/Step3.png' %}" data-holder-rendered="true">
     </div>
   </div>
 
@@ -105,16 +110,20 @@
   <div class="row featurette">
     <div class="col-md-5 order-md-1">
       <div class="row">
+        <img class="featurette-image img-fluid mx-auto" src="{% static 'dashboard/image/Step4.png' %}" data-holder-rendered="true" style="height: 70%; width: 70%;">
+      </div>
+      <div class="row" style="margin-top: 10%;"></div>
+      <div class="row">
         <img class="featurette-image img-fluid mx-auto" src="{% static 'dashboard/image/Pic4.png' %}" data-holder-rendered="true">
       </div>
-      <div class="row" style="margin-top: 10%;">
-      </div>
+      <div class="row" style="margin-top: 10%;"></div>
       <div class="row">
         <img class="featurette-image img-fluid mx-auto" src="{% static 'dashboard/image/Pic5.png' %}" data-holder-rendered="true">
       </div>
     </div>
     <div class="col-md-7 order-md-2">
       <h2 class="featurette-heading">Wait a minutes, check-in view in calendar? <span class="text-muted">Here you go.</span></h2>
+      <a class="btn btn-danger rounded-5" href="{% url 'dashboard' %}">LeetCode Tracker</a>
       <p class="lead">Use the Check-In feature to mark your progress and keep track of completed LeetCode problems effortlessly.</p>
     </div>
   </div>

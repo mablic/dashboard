@@ -19,26 +19,48 @@ class trackerView(ListView):
     paginate_by = 30
     template_name = 'tracker/trackerBase.html'  # Relative path to the template file
     dateFormat = '%m-%d-%Y'
+    rangeDateFormat = '%Y-%m-%d'
 
     def get(self, request, *args, **kwargs):
-        # print(request.GET)
-        if 'viewType' in request.GET and request.GET['viewType'] == 'tableView':
+        # print("GET")
+        print(request.GET)
+        if 'viewType' in request.GET:
             discordUserId = "NA"
             currentUserId ="NA"
-            filterQuery = StudyTracker.objects.all()
             if 'discordUserId' in self.request.GET and self.request.GET['discordUserId'] != 'None':
                 discordUserId = self.request.GET['discordUserId']
             if 'currentUserId' in self.request.GET and self.request.GET['currentUserId'] != 'None':
                 currentUserId = self.request.GET['currentUserId']
-            filterQuery = filterQuery.filter(
-                Q(userId=currentUserId) | Q(discordUserId=discordUserId)
-            )
-            # data = list(StudyTracker.objects.all().values('_id', 'studyDate', 'studyTopic', 'studyTime'))
-            data = list(filterQuery.values('studyDate', 'studyTopic', 'studyTime'))
-            return JsonResponse(data, safe=False)
+            if request.GET['viewType'] == 'tableView':
+                filterQuery = StudyTracker.objects.all()
+                filterQuery = filterQuery.filter(
+                    Q(userId=currentUserId) | Q(discordUserId=discordUserId)
+                )
+                data = list(filterQuery.values('studyDate', 'studyTopic', 'studyTime'))
+                return JsonResponse(data, safe=False)
+            elif request.GET['viewType'] == 'goalView':
+                filterQuery = GoalTracker.objects.all()
+                filterQuery = filterQuery.filter(
+                    Q(userId=currentUserId) | Q(discordUserId=discordUserId)
+                )
+                data = []
+                for itm in filterQuery:
+                    data.append(
+                        {
+                            "goalStartDate": itm.goalStartDate,
+                            "goalEndDate": itm.goalEndDate,
+                            "goalTopic": itm.goalTopic,
+                            "goalTarget": itm.goalTarget,
+                            "goalComplete": round(itm.get_total_study_time(itm.goalStartDate, itm.goalEndDate), 2)
+                        }
+                    )
+                data.sort(key=lambda x: x['goalTarget'])
+                # data = list(filterQuery.values())
+                return JsonResponse(data, safe=False)
         return render(request, self.template_name)
 
     def post(self, request):
+        print(request.POST)
         filterQuery = StudyTracker.objects.all()
         data = []
         if 'postType' in request.POST:
@@ -53,8 +75,6 @@ class trackerView(ListView):
                     currentUserId ="NA"
                 if request.POST['postType'] == 'graphView':
                     if 'endDate' in self.request.POST and self.request.POST['endDate'] != "":
-                        # print(type(self.request.GET['endDate']))
-                        # endDate = datetime.strptime(self.request.GET['endDate'], self.dateFormat)
                         endDate = datetime.strptime(self.request.POST['endDate'], self.dateFormat)
                     else:
                         endDate = datetime(2020,1,1)
@@ -75,6 +95,118 @@ class trackerView(ListView):
                         'userData': list(userQuery.values()),
                         'avgData': list(allQuery.values())
                     }
+                elif request.POST['postType'] == 'goalTracker':
+                    goalFunction = request.POST['function']
+                    # print(f"CURRENT FUNCTION IS {goalFunction}")
+                    if goalFunction == 'graph':
+                        goalStartDate = datetime.strptime(self.request.POST['goalStartDate'], self.dateFormat)
+                        goalEndDate = datetime.strptime(self.request.POST['goalEndDate'], self.dateFormat)
+                        allRecord = GoalTracker.objects.filter(
+                            Q(userId=currentUserId) | Q(discordUserId=discordUserId),
+                            goalEndDate__gte=goalStartDate,
+                        )
+                        data = []
+                        for record in allRecord:
+                            # print("IN RECORD!")
+                            # print(record)
+                            studyRecord = StudyTracker.objects.filter(
+                                Q(userId=currentUserId) | Q(discordUserId=discordUserId),
+                                studyTopic__icontains=record.goalTopic
+                            )
+                            # filter by the user selected range
+                            studyRecord = studyRecord.filter(
+                                studyDate__range=(goalStartDate, goalEndDate)
+                            )
+                            # print("FILTER 1")
+                            # print(list(studyRecord.values()))
+                            # # filter by the goal dates
+                            # studyRecord = studyRecord.filter(
+                            #     studyDate__range=(record.goalStartDate, record.goalEndDate)
+                            # )
+                            # print("FILTER 2")
+                            # print(list(studyRecord.values()))                            
+                            completeTime = -1
+                            if goalEndDate.date() >= record.goalStartDate:
+                                completeTime = record.get_total_study_time(goalStartDate, goalEndDate)
+                            # print(goalStartDate)
+                            # print(goalEndDate)
+                            # print(completeTime)
+                            # print(list(studyRecord.values()))
+                            data.append({
+                                'userId': record.userId,
+                                'userName': record.userName,
+                                'discordUserId': record.discordUserId,
+                                'goalStartDate': record.goalStartDate,
+                                'goalEndDate': record.goalEndDate,
+                                'goalTopic': record.goalTopic,
+                                'goalTarget': record.goalTarget,
+                                'goalComplete': completeTime,
+                                'goalRecords': list(studyRecord.values())
+                            })
+                        return JsonResponse(data, safe=False, encoder=DjangoJSONEncoder)
+                    else:
+                        try:
+                            oldGoalStartDate = request.POST['oldGoalStartDate']
+                            oldGoalEndDate = request.POST['oldGoalEndDate']
+                            oldGoalTopic = request.POST['oldGoalTopic']
+                            oldGoalTarget = request.POST['oldGoalTarget']
+                            # oldGoalComplete = request.POST['oldGoalComplete']
+                            goalStartDate = request.POST['goalStartDate']
+                            goalEndDate = request.POST['goalEndDate']
+                            goalTopic = request.POST['goalTopic']
+                            goalTarget = request.POST['goalTarget']
+                            goalComplete = 0 if request.POST['goalComplete'] == '' else request.POST['goalComplete']
+                            # print(f"sd:{goalStartDate}, ed:{goalEndDate}, topic:{goalTopic}, target:{goalTarget}, complete:{goalComplete}")
+                            existRecord = GoalTracker.objects.filter(
+                                Q(userId=currentUserId) | Q(discordUserId=discordUserId),
+                                goalStartDate=goalStartDate,
+                                goalEndDate=goalEndDate,
+                                goalTopic=goalTopic,
+                                # goalTarget=goalTarget,
+                                # goalComplete=goalComplete,
+                            )
+                            if goalFunction == 'delete':
+                                try:
+                                    # print("Delete!")
+                                    existRecord.delete()
+                                    return JsonResponse({'message': 'Records deleted!'}, status=200)
+                                except Exception as e:
+                                    print("Error while delete the goal tracker goal!")
+                                    return JsonResponse({'message': 'Delete goal failed', 'error': str(e)}, status=400)
+                            else:
+                                # print("Updated")
+                                if oldGoalStartDate != '' and oldGoalEndDate !='':
+                                    oldRecord = GoalTracker.objects.filter(
+                                        Q(userId=currentUserId) | Q(discordUserId=discordUserId),
+                                        goalStartDate=oldGoalStartDate,
+                                        goalEndDate=oldGoalEndDate,
+                                        goalTopic=oldGoalTopic,
+                                        goalTarget=oldGoalTarget,
+                                        # goalComplete = oldGoalComplete,
+                                    )
+                                    if oldRecord.exists():
+                                        # print("Delete old")
+                                        oldRecord.delete()
+                                if existRecord.exists():
+                                    # print("Exists!")
+                                    return JsonResponse({'message': 'Records exists!'}, status=200)
+                                else:
+                                    # print("New Record!")
+                                    newRecord = GoalTracker(
+                                        userId = currentUserId,
+                                        userName = '',
+                                        discordUserId = discordUserId,
+                                        goalStartDate = goalStartDate,
+                                        goalEndDate = goalEndDate,
+                                        goalTopic = goalTopic,
+                                        goalTarget = goalTarget,
+                                        goalComplete = goalComplete,
+                                    )
+                                    newRecord.save()
+                                    return JsonResponse({'message': 'Update successful'}, status=200)
+                        except Exception as e:
+                            print("ERROR!")
+                    return JsonResponse({'message': 'Update failed', 'error': str(e)}, status=400)
                 elif request.POST['postType'] == 'tableViewUpdate':
                     studyDate = datetime(2020,1,1)
                     studyTopic = 'NA'
@@ -137,7 +269,7 @@ class trackerView(ListView):
                     else:
                         # print("IN OTHERS")
                         pass
-            if request.POST['postType'] == 'rankView':
+            elif request.POST['postType'] == 'rankView':
                 if 'endDate' in self.request.POST and self.request.POST['endDate'] != "":
                     # print(type(self.request.GET['endDate']))
                     # endDate = datetime.strptime(self.request.GET['endDate'], self.dateFormat)
@@ -173,7 +305,6 @@ class trackerView(ListView):
 
                 # print(discordDict)
                 data = [val for key, val in discordDict.items()]
-                
         else:
             pass
         return JsonResponse(data, safe=False, encoder=DjangoJSONEncoder)

@@ -90,15 +90,20 @@
     </div>
     <div class="b-divider-section"></div>
     <div class="row">
-      <div class="btn-group">
-        <button class="badge text-bg-secondary rounded-5" disabled>Question Number</button>
-        <div class="col-md-1">
-          <input type="text" class="form-control rounded-5" placeholder="Qty #" oninput="addNumberFilter()" id="numberFilter">
+      <div class="col-md-5">
+        <div class="btn-group">
+          <button class="badge text-bg-secondary rounded-5" disabled>Question Number</button>
+          <div class="col-md-2">
+            <input type="text" class="form-control rounded-5" placeholder="Qty #" oninput="addNumberFilter()" id="numberFilter">
+          </div>
+          <button class="badge text-bg-secondary rounded-5" disabled>Question Name</button>
+          <div class="col-md-10">
+            <input type="text" class="form-control rounded-5" placeholder="Qty Name" oninput="addTextFilter()" id="textFilter">
+          </div>
         </div>
-        <button class="badge text-bg-secondary rounded-5" disabled>Question Name</button>
-        <div class="col-md-4">
-          <input type="text" class="form-control rounded-5" placeholder="Qty Name" oninput="addTextFilter()" id="textFilter">
-        </div>
+      </div>
+      <div class="col-md-7 d-flex justify-content-end">
+        <a class="btn btn-danger rounded-5" href="{% url 'home' %}#leetCodeBoard" style="color: white;">Instruction</a>
       </div>
     </div>
   </div>

@@ -1,9 +1,10 @@
-var GLOBAL_TABLE_VALUES = 'NA';
+let GLOBAL_TABLE_VALUES = 'NA';
+let table;
 
 $(document).ready(function() {
-  var currentUserId = getUserId();
-  var discordUserId = getDiscordUserId();
-  var table = $('#studyTable').DataTable({
+  let currentUserId = get_userId();
+  let discordUserId = get_discord_userId();
+  table = $('#studyTable').DataTable({
     dom: '<"top"lfB>rt<"bottom"ip><"clear">',
     buttons: ['copy', 'excel', 'pdf'],
     ajax: {
@@ -22,15 +23,14 @@ $(document).ready(function() {
     ],
     order: [[0, 'desc']]
   });
-
   // Handle click on a row to open the modal with row data
   $('#studyTable tbody').on('click', 'tr', function() {
-    var data = table.row(this).data();
-
+    let data = table.row(this).data();
+  
     // Fill the modal with data from the clicked row
-    var studyDate = $('#inputStudyDate');
-    var studyTopic = $('#inputStudyTopic');
-    var studyTime = $('#inputStudyTime');
+    let studyDate = $('#inputStudyDate');
+    let studyTopic = $('#inputStudyTopic');
+    let studyTime = $('#inputStudyTime');
     studyDate.val(data.studyDate);
     studyDate.attr('oldValue', data.studyDate);
     studyTopic.val(data.studyTopic);
@@ -41,82 +41,90 @@ $(document).ready(function() {
     $('#editModal').modal('show');
   });
 
-  $('#saveChangesBtn').on('click', function() {
-    // Get the modified data from the modal form
-    var studyDate = $('#inputStudyDate').val();
-    var studyTopic = $('#inputStudyTopic').val();
-    var studyTime = $('#inputStudyTime').val();
-    var oldStudyDate = $('#inputStudyDate').attr('oldValue');
-    var oldStudyTopic = $('#inputStudyTopic').attr('oldValue');
-    var oldStudyTime = $('#inputStudyTime').attr('oldValue');
-    var currentUserId = getUserId();
-    var discordUserId = getDiscordUserId();
-    $.ajax({
-      type: 'post',
-      dataType: "json",
-      url: "/tracker/",
-      data: {
-        'postType': 'tableViewUpdate',
-        'function': GLOBAL_TABLE_VALUES,
-        'studyDate': studyDate,
-        'studyTopic': studyTopic,
-        'studyTime': studyTime,
-        'oldStudyDate': oldStudyDate,
-        'oldStudyTopic': oldStudyTopic,
-        'oldStudyTime': oldStudyTime,
-        'discordUserId': discordUserId,
-        'currentUserId': currentUserId,
-      },
-      headers: { "X-CSRFToken": csrftoken },
-    }).done(function(result) {
-        table.ajax.reload(null, false);
-    });
-    resetModal();
-  });
-
-  $('#addRecordBtn').on('click', function() {
-    GLOBAL_TABLE_VALUES = 'add';
-    $('#editModal').modal('show');
-  })
-
-  $('#deleteBtn').on('click', function() {
-    var oldStudyDate = $('#inputStudyDate').attr('oldValue');
-    var oldStudyTopic = $('#inputStudyTopic').attr('oldValue');
-    var oldStudyTime = $('#inputStudyTime').attr('oldValue');
-
-    $.ajax({
-      type: 'post',
-      dataType: "json",
-      url: "/tracker/",
-      data: {
-        'postType': 'tableViewUpdate',
-        'function': 'delete',
-        'oldStudyDate': oldStudyDate,
-        'oldStudyTopic': oldStudyTopic,
-        'oldStudyTime': oldStudyTime,
-        'discordUserId': discordUserId,
-        'currentUserId': currentUserId,
-      },
-      headers: { "X-CSRFToken": csrftoken },
-    }).done(function(result) {
-        table.ajax.reload(null, false);
-    });
-    // Hide the modal after updating the data
-    resetModal();
-  })
-  var inputStudyTime=$('#inputStudyTime');
+  let inputStudyTime=$('#inputStudyTime');
   inputStudyTime.on('input', function() {
-    var value = parseFloat($(this).val());
+    let value = parseFloat($(this).val());
     // Check if the input is within the range
     if (isNaN(value) || value < 0 || value > 720) {
-        $('#inputStudyTime').css('background-color', 'red');
+      $('#inputStudyTime').css('background-color', 'red');
     } else {
-        $('#inputStudyTime').css('background-color', 'white');
+      $('#inputStudyTime').css('background-color', 'white');
     }
   });
 });
 
-function resetModal(){
+function delete_tracker_record() {
+  let oldStudyDate = $('#inputStudyDate').attr('oldValue');
+  let oldStudyTopic = $('#inputStudyTopic').attr('oldValue');
+  let oldStudyTime = $('#inputStudyTime').attr('oldValue');
+  let currentUserId = get_userId();
+  let discordUserId = get_discord_userId();
+
+  $.ajax({
+    type: 'post',
+    dataType: "json",
+    url: "/tracker/",
+    data: {
+      'postType': 'tableViewUpdate',
+      'function': 'delete',
+      'oldStudyDate': oldStudyDate,
+      'oldStudyTopic': oldStudyTopic,
+      'oldStudyTime': oldStudyTime,
+      'discordUserId': discordUserId,
+      'currentUserId': currentUserId,
+    },
+    headers: { "X-CSRFToken": csrftoken },
+  }).done(function(result) {
+    table.ajax.reload();
+  });
+  reset_modal();
+}
+
+function add_table_record() {
+  GLOBAL_TABLE_VALUES = 'add';
+  $('#editModal').modal('show');
+}
+
+function save_tracker_record() {
+  // Get the modified data from the modal form
+  let studyDate = $('#inputStudyDate').val();
+  let studyTopic = $('#inputStudyTopic').val();
+  let studyTime = $('#inputStudyTime').val();
+  let oldStudyDate = $('#inputStudyDate').attr('oldValue');
+  let oldStudyTopic = $('#inputStudyTopic').attr('oldValue');
+  let oldStudyTime = $('#inputStudyTime').attr('oldValue');
+  let currentUserId = get_userId();
+  let discordUserId = get_discord_userId();
+
+  let form = document.getElementById('editForm');
+  if (!form.checkValidity()) {
+    return;
+  }
+
+  $.ajax({
+    type: 'post',
+    dataType: "json",
+    url: "/tracker/",
+    data: {
+      'postType': 'tableViewUpdate',
+      'function': GLOBAL_TABLE_VALUES,
+      'studyDate': studyDate,
+      'studyTopic': studyTopic,
+      'studyTime': studyTime,
+      'oldStudyDate': oldStudyDate,
+      'oldStudyTopic': oldStudyTopic,
+      'oldStudyTime': oldStudyTime,
+      'discordUserId': discordUserId,
+      'currentUserId': currentUserId,
+    },
+    headers: { "X-CSRFToken": csrftoken },
+  }).done(function() {
+    table.ajax.reload();
+  });
+  reset_modal();
+};
+
+function reset_modal(){
   $('#inputStudyDate').val('');
   $('#inputStudyTopic').val('');
   $('#inputStudyTime').val('');
@@ -127,7 +135,6 @@ function resetModal(){
 }
 
 document.getElementById('exportBtn').addEventListener('click', function() {
-  var table = document.getElementById('studyTable');
-  TableToExcel.convert(table, { filename: 'data.xlsx' }); // Perform the export
+  let tableExport = document.getElementById('studyTable');
+  TableToExcel.convert(tableExport, { filename: 'data.xlsx' }); // Perform the export
 });
-
