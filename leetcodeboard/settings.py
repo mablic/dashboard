@@ -6,7 +6,7 @@ import mimetypes
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PARENT_DIR = os.path.dirname(BASE_DIR)
 mimetypes.add_type("text/javascript", ".js", True)
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = "123"
 # DISCORD_CLIENT_ID = os.environ.get('DISCORD_CLIENT_ID')
 # DISCORD_CLIENT_SECRET = os.environ.get('DISCORD_CLIENT_SECRET')
 
@@ -98,7 +98,7 @@ DATABASES = {
             'NAME': 'studyDB',
             'ENFORCE_SCHEMA': False,
             'CLIENT': {
-                'host': os.environ.get('MONGODB_CONNECTION')
+                'host': "mongodb+srv://DevUser:Dq52IRc4PZoYozfu@cluster0.cprsgvn.mongodb.net/?retryWrites=true&w=majority"
             }  
         }
 }
