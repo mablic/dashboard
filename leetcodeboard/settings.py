@@ -6,7 +6,7 @@ import mimetypes
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PARENT_DIR = os.path.dirname(BASE_DIR)
 mimetypes.add_type("text/javascript", ".js", True)
-SECRET_KEY = "123"
+SECRET_KEY = os.environ.get('SECRET_KEY')
 # DISCORD_CLIENT_ID = os.environ.get('DISCORD_CLIENT_ID')
 # DISCORD_CLIENT_SECRET = os.environ.get('DISCORD_CLIENT_SECRET')
 
@@ -21,7 +21,7 @@ DISCORD_REDIRECT_URI = 'https://' + ALLOWED_HOSTS[0] + '/callback'
 
 # Debug
 # DEBUG = True
-# ALLOWED_HOSTS = ['127.0.0.1']
+# ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 # DISCORD_REDIRECT_URI = 'http://' + ALLOWED_HOSTS[0] + ':8000/callback'
 
 INSTALLED_APPS = [
@@ -98,7 +98,7 @@ DATABASES = {
             'NAME': 'studyDB',
             'ENFORCE_SCHEMA': False,
             'CLIENT': {
-                'host': "mongodb+srv://DevUser:Dq52IRc4PZoYozfu@cluster0.cprsgvn.mongodb.net/?retryWrites=true&w=majority"
+                'host': os.environ.get('MONGODB_CONNECTION')
             }  
         }
 }
@@ -169,4 +169,3 @@ if __name__ == '__main__':
     # Print all static folder paths
     for path in STATICFILES_DIRS:
         print("Static folder path:", path)
-
